@@ -36,18 +36,32 @@ int main(void){
 	scanf("%d", &n);
 
 	int an;
-	int an1 = 0;
+	int an1 = 1;
 	int an2 = 0;
-	int an3 = 1;
+	int an3 = 0;
 
-	REP(i,n){
-		an = (an1 + an2 + an3) % 10007;
-		an3 = an2;
-		an2 = an1;
-		an1 = an;
+
+	switch(n){
+		case 1:
+			an = 0;
+			break;
+		case 2:
+			an = 0;
+			break;
+		case 3:
+			an = 1;
+			break;
+		default:
+
+			REP(i,n-3){
+				an = (an1 + an2 + an3) % 10007;
+				an3 = an2;
+				an2 = an1;
+				an1 = an;
+			}
+
+
 	}
-
-
 	printf("%d\n",an);
 
 	return 0;
