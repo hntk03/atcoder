@@ -38,13 +38,14 @@ int main(void){
 	REP(i,NUM) scanf("%d", &ng[i]);
 
 	for(int i=n;i>=0;--i){
-		if(ng[])
-
+		FOR(j,1,4){
+			if(ng[j-1] == i) continue;
+			else dp[i-j] = min(dp[i]+1,dp[i-j]);
+		}
 	}
 
-
-	printf("YES\n");
-	printf("NO\n");
+	if(dp[0] <= 100) printf("YES\n");
+	else printf("NO\n");
 
 
 	return 0;
