@@ -17,23 +17,19 @@ typedef vector<string> VS;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
 
+#define D 100000007
 
 
 int main(void){
 
-	int N; scanf("%d", &N);
+	int A,B,C; scanf("%d %d %d", &A, &B, &C);
 
-	vector<pair<int, int>> ans(N);
-	int a;
-	REP(i,N){
-		scanf("%d", &a);
-		ans[i] = make_pair(a,i+1);
-	}
+	long long ans = (long long)(A*B)%D;
+	ans = (ans * C) % D;
+	
+	
+	printf("%lld\n", ans);
 
-	sort(ans.begin(), ans.end());
-	
-	for(int i=N-1; i > -1; i--) printf("%d\n", ans[i].second);
-	
 
 	return 0;
 

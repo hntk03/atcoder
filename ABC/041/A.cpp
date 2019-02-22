@@ -21,19 +21,12 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int N; scanf("%d", &N);
+	char s[101];
+	int i;
+	scanf("%s %d", s, &i);
 
-	vector<pair<int, int>> ans(N);
-	int a;
-	REP(i,N){
-		scanf("%d", &a);
-		ans[i] = make_pair(a,i+1);
-	}
+	printf("%c\n",s[i-1]);
 
-	sort(ans.begin(), ans.end());
-	
-	for(int i=N-1; i > -1; i--) printf("%d\n", ans[i].second);
-	
 
 	return 0;
 
