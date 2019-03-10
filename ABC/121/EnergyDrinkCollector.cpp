@@ -35,13 +35,9 @@ int main(void){
 	long long ans = 0;
 	int cnt = 0;
 	REP(i,N){
-		if(cnt+store[i].second<M){
-			ans += (long long)(store[i].first*store[i].second);
-			cnt += store[i].second;
-		}else{
-			ans += (long long)(M-cnt)*store[i].first;
-			break;
-		}
+		int buy = min(M, store[i].second);
+		ans += (long long)buy * store[i].first;
+		M -= buy;
 	}
 
 
