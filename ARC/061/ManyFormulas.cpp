@@ -21,19 +21,23 @@ typedef vector<string> VS;
 
 int main(void){
 
-	char s[11]; scanf("%s", s);
+	string s; cin >> s;
 
-	int ans = 0;
-	int mask = 0;
+	int p = s.size()-1;
+	int len = (int)pow(2,p);
 
-	REP(i,(int)pow(2,strlen(s)-1)){
-		ans += 
+
+	REP(i,len){
+		bitset<11> b(10);
+		for(int j=p-1;j>0;--j){
+			if(b[j])
+			
+
+
+		}
 	}
 
 
-
-
-
-return 0;
+	return 0;
 
 }
