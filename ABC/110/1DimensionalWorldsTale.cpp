@@ -21,13 +21,21 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	int N, M, X, Y; cin >> N >> M >> X >> Y;
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
+	int x_max = -1;
+	REP(i,N){
+		int x; cin >> x;
+		x_max = max(x_max, x);
+	}
 
+	int y_min = 1 << 30;
+	REP(i,M){
+		int y; cin >> y;
+		y_min = min(y_min, y);
+	}
+	if(x_max < y_min and X < x_max+1 and Y >= x_max+1) cout << "No War" << endl;
+	else cout << "War" << endl;
 
 	return 0;
 

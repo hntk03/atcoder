@@ -21,13 +21,12 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	VI v(3);
+	REP(i,3) cin >> v[i];
+	SORT(v);
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
-
+	int ans = v[2]*10+v[1]+v[0];
+	cout << ans << endl;
 
 	return 0;
 

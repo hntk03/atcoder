@@ -21,13 +21,17 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	string s; cin >> s;
+	if(s[0] == '9') s[0] = '1';
+	else if(s[0] == '1') s[0] = '9';
+	
+	if(s[1] == '9') s[1] = '1';
+	else if(s[1] == '1') s[1] = '9';
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
+	if(s[2] == '9') s[2] = '1';
+	else if(s[2] == '1') s[2] = '9';
 
+	cout << s << endl;
 
 	return 0;
 

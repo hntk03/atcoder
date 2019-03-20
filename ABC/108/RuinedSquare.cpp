@@ -21,12 +21,16 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	int x1, y1, x2, y2; cin >> x1 >> y1 >> x2 >> y2;
+	int x3, y3, x4, y4;
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
+	y3 = y2;
+	y4 = y1;
+	int d = abs(y2-y1);
+	x3 = x1 - d;
+	x4 = x1 - d;
+
+	cout << x3 << ' ' << y3 << ' ' << x4 << ' ' << y4 << endl;
 
 
 	return 0;

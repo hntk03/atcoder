@@ -21,13 +21,15 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	string S; cin >> S;
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
+	int N = S.length();
+	int ans = 1 << 30;
+	REP(i,N-2){
+		ans = min(ans, abs(753-stoi(S.substr(i,3))));
+	}
 
+	cout << ans << endl;
 
 	return 0;
 

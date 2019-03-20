@@ -21,14 +21,22 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	int N, T, A; cin >> N >> T >> A;
+	int H;
+	int ans = 1;
+	double min_value = 10000000;
+	REP(i,N){
+		cin >> H;
+		double ave_temp = T - (H*0.006);
+		if(abs(ave_temp-A) < min_value){
+			min_value = abs(ave_temp-A);
+			ans = i+1;
+		}
+	}
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
+	cout << ans << endl;
 
 
-	return 0;
+		return 0;
 
 }

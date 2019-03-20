@@ -21,12 +21,11 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	int R; cin >> R;
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
+	if(R < 1200) cout << "ABC" << endl;
+	else if(R < 2800) cout << "ARC" << endl;
+	else  cout << "AGC" << endl;
 
 
 	return 0;

@@ -21,14 +21,19 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	int A, B, C; cin >> A >> B >> C;
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
+	int ans = min(
+			{abs(A-B) + abs(B-C),
+			abs(A-C) + abs(C-B),
+			abs(B-A) + abs(A-C),
+			abs(B-C) + abs(C-A),
+			abs(C-A) + abs(A-B),
+			abs(C-B) + abs(B-A)}
+			);
 
 
+	cout << ans << endl;
 	return 0;
 
 }

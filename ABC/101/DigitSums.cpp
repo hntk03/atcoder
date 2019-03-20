@@ -21,12 +21,17 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	int N; cin >> N;
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
+	int tmp = N;
+	int sum = 0;
+	while(tmp){
+		sum += tmp % 10;
+		tmp /= 10;
+	}
+
+	if(N%sum == 0) cout << "Yes" << endl;
+	else cout << "No" << endl;
 
 
 	return 0;

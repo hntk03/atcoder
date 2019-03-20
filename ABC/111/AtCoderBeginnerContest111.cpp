@@ -21,14 +21,14 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	int N; cin >> N;
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
-
-
+	int p = N/100;
+	int x = 100*p+10*p+p;
+	if(N<= x) cout << x << endl;
+	else{
+		cout << x+111 << endl;
+	}
 	return 0;
 
 }

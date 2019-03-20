@@ -21,13 +21,19 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	string S; cin >> S;
+	
+	bool ans = true;
+	if(S.front() != 'A') ans = false;
+ 	else if(!count(S.begin()+2, S.end()-1, 'C')) ans = false;
+	else{
+		int cnt = 0;
+		REP(i,S.length()) if(islower(S[i])) cnt++;
+		if(!(cnt == S.length()-2))  ans = false;
+	}
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
-
+	if(ans == true) cout << "AC" << endl;
+	else cout << "WA" << endl;
 
 	return 0;
 

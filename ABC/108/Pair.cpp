@@ -21,12 +21,16 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int X, A, B; cin >> X >> A >> B;
+	int K; cin >> K;
 
-	int now = B - A;
-	if(now <= 0) cout << "delicious" << endl;
-	else if(now <= X) cout << "safe" << endl;
-	else cout << "dangerous" << endl;
+	int ans = 0;
+	FOR(i,1,K+1){
+		FOR(j,1,K+1){
+			if(i != j and i%2 != j%2) ans++;
+		}
+	}
+	ans /= 2;
+	cout << ans << endl;
 
 
 	return 0;
