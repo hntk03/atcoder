@@ -23,8 +23,8 @@ int main(void){
 
 	int A, B, K; cin >> A >> B >> K;
 	set<int> st; 
-	FOR(i,A,A+K) st.insert(i);
-	FOR(i,B-K+1,B+1) st.insert(i);
+	for(int i=A;i < min(A+K,B+1);++i) st.insert(i);
+	for(int i=B;i > max(B-K,A-1);--i) st.insert(i);
 
 	for(auto t:st){
 		cout << t << endl;

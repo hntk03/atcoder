@@ -21,14 +21,19 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int A, B, C; cin >> A >> B >> C;
+	string s; 
+	string t;
+	cin >> s >> t;
 
-	bool ans = false;
-	REP(i,1000){
-		if((A*i)%B == C) ans = true;
-	}
+ 	SORT(s);
+ 	SORT(t);
+	reverse(t.begin(), t.end());
 
-	cout << (ans ? "YES" : "NO") << endl;
+	if(s < t) cout << "Yes" << endl;
+	else cout << "No" << endl;
+
+
+
 	return 0;
 
 }

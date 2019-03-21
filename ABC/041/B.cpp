@@ -17,18 +17,15 @@ typedef vector<string> VS;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
 
-#define D 100000007
+const int mod = 1e9 + 7;
 
 
 int main(void){
 
-	int A,B,C; scanf("%d %d %d", &A, &B, &C);
+	long long A, B, C; cin >> A >> B >> C;
 
-	long long ans = (long long)(A*B)%D;
-	ans = (ans * C) % D;
-	
-	
-	printf("%lld\n", ans);
+	cout << A * B % mod * C % mod << endl;
+
 
 
 	return 0;

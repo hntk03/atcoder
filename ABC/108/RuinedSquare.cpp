@@ -22,16 +22,19 @@ typedef vector<string> VS;
 int main(void){
 
 	int x1, y1, x2, y2; cin >> x1 >> y1 >> x2 >> y2;
-	int x3, y3, x4, y4;
+	int x = x2;
+	int y = y2;
+	int dx = x2 - x1;
+	int dy = y2 - y1;
 
-	y3 = y2;
-	y4 = y1;
-	int d = abs(y2-y1);
-	x3 = x1 - d;
-	x4 = x1 - d;
-
-	cout << x3 << ' ' << y3 << ' ' << x4 << ' ' << y4 << endl;
-
+	REP(i,2){
+		swap(dx,dy);
+		dx = -dx;
+		x += dx;
+		y += dy;
+		if(i == 0) cout << x << ' ' << y << ' ';
+		if(i == 1) cout << x << ' ' << y << endl;;
+	}
 
 	return 0;
 

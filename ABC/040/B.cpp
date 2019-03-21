@@ -21,11 +21,14 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int n; scanf("%d", &n);
+	int n; cin >> n;
 
-	int r = (int)sqrt(n);
-	printf("%d\n", n%r);
+	int ans = 1 << 30;
+	REP(i,n){
+		ans = min()
+	}
 
+	cout << ans << endl;
 
 	return 0;
 

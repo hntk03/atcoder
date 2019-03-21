@@ -21,8 +21,6 @@ typedef vector<string> VS;
 
 int main(void){
 
-	// long long int a, b, x; scanf("%lld %lld %lld", &a, &b, &x);
-	long long int a, b, x; scanf("%d %d %d", &a, &b, &x);
 
 	long long int ans = 0;
 	FOR(i,a,b+1){

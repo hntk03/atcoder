@@ -21,14 +21,33 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int A, B, C; cin >> A >> B >> C;
+	String S; cin >> S;
+	int T; cin >> T;
+	int x,y;
+	x = y = 0;
+	REP(i,S.length()){
+		switch(S[i]){
+			case 'L':
+				x--;
+				break;
+			case 'R':
+				x++;
+				break;
+			case 'U':
+				y++;
+				break;
+			case 'D':
+				y--;
+				break;
+			case '?':
 
-	bool ans = false;
-	REP(i,1000){
-		if((A*i)%B == C) ans = true;
+				break;
+
+		}
+
 	}
 
-	cout << (ans ? "YES" : "NO") << endl;
+
 	return 0;
 
 }
