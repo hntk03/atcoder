@@ -21,23 +21,19 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int N; cin >> N;
-	VI t(N);
-	REP(i,N) cin >> t[i];
+	int n, m; cin >> n >> m;
+	n = n % 12;
+	
+	double deg;
+	deg = abs(30.0*n - 5.5*m);
 
-	int C = 1 << N;
-	int ans = 1 << 30;
-	REP(i,C){
-		bitset<4> bs(i);
-		int a = 0, b = 0;
-		REP(j,N){
-			if(bs[j] == true) a += t[j];
-			if(bs[j] == false) b += t[j];
-		}
-		ans = min(ans, max(a, b));
+	if(deg > 180){
+		deg = 360 - deg;
 	}
+	
+	cout << deg << endl;
 
-	cout << ans << endl;
+
 	return 0;
 
 }

@@ -21,23 +21,33 @@ typedef vector<string> VS;
 
 int main(void){
 
-	string s; cin >> s;
-
-	int p = s.size()-1;
-	int len = (int)pow(2,p);
+	string S; cin >> S;
 
 
-	REP(i,len){
-		bitset<11> b(10);
-		for(int j=p-1;j>0;--j){
-			if(b[j])
-			
 
-
+	long long ans = 0;
+	long long sum;
+	int S_len = S.length();
+	int N = 1 << (S_len - 1);
+	REP(i,N){
+		bitset<10> b(i);
+		sum = S[0] - '0';
+		REP(j,S_len-1){
+			if(b[j] == true){
+				ans += sum;
+				sum = S[j+1] - '0';
+			}
+			else{ 
+				sum *= 10;
+				sum += S[j+1] - '0';
+			}
 		}
+		ans += sum;
+
+
 	}
 
-
+	cout << ans << endl;
 	return 0;
 
 }
