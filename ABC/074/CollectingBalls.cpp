@@ -21,11 +21,20 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int D, N; cin >> D >> N;
-	int b = pow(100, D);
+	int N, K; cin >> N >> K;
+	// vector<int> x(N);
+	int ans = 0;
+	REP(i,N){
+		// cin >> x[i];
+		int x;
+		cin >> x;
+		ans += min(abs(K-x)*2, abs(0-x)*2);
+	}
 
-	if(N != 100) cout << b * N << endl;
-	else cout << b * (N+1);
+	cout << ans << endl;
+
+	
+
 
 	return 0;
 

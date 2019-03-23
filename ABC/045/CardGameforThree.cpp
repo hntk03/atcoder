@@ -21,47 +21,38 @@ typedef vector<string> VS;
 
 int main(void){
 
-	char Sa[101];
-	char Sb[101];
-	char Sc[101];
+	string Sa, Sb, Sc; cin >> Sa >> Sb >> Sc;
 
-	scanf("%s", Sa);
-	scanf("%s", Sb);
-	scanf("%s", Sc);
-
-	int la, lb, lc;
-	la = strlen(Sa);
-	lb = strlen(Sb);
-	lc = strlen(Sc);
-
-	int idxa, idxb, idxc;
-	idxa = idxb = idxc = 0;
-
-	char card = Sa[0];
-	idxa=1;
-	while(idxa <= la and idxb <= lb and idxc <= lc){
-		switch(card){
+	int idx_a = 1;
+	int idx_b = 0;
+	int idx_c = 0;
+	char turn = Sa[0];
+	while(true){
+		switch(turn){
 			case 'a':
-				card = Sa[idxa++];
+				turn = Sa[idx_a];
+				idx_a++;
 				break;
 			case 'b':
-				card = Sb[idxb++];
+				turn = Sb[idx_b];
+				idx_b++;
 				break;
 			case 'c':
-				card = Sc[idxc++];
+				turn = Sc[idx_c];
+				idx_c++;
 				break;
 		}
-		if(idxa == la){ 
-			printf("A\n");
-			break;
+		if(idx_a == Sa.length() and turn == 'a'){
+			cout << 'A' << endl;
+			return 0;
 		}
-		if(idxb == lb){ 
-			printf("B\n"); 
-			break;
+		else if(idx_b == Sb.length() and turn == 'b'){
+			cout << 'B' << endl;
+			return 0;
 		}
-		if(idxc == lc){ 
-			printf("C\n");
-			break;
+		else if(idx_c == Sc.length() and turn == 'c'){
+			cout << 'C' << endl;
+			return 0;
 		}
 	}
 

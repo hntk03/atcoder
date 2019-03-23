@@ -21,8 +21,17 @@ typedef vector<string> VS;
 
 int main(void){
 
+	string S, T;
+	cin >> S >> T;
+	int S_len = S.length();
 	
-
+	bool ans = false;
+	REP(i,S_len){
+		S = S.back() + S.substr(0,S_len-1);
+		if(S == T) ans = true;
+	}
+	
+	cout << (ans ? "Yes" : "No") << endl;
 
 	return 0;
 

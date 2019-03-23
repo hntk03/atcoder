@@ -21,12 +21,18 @@ typedef vector<string> VS;
 
 int main(void){
 
-	string s;
-	int k;
-	cin >> s >> k;
-	set<string> st;
-	REP(i, s.size()-k+1) st.insert(s.substr(i, k));
-	cout << st.size() << endl;
+	string s; cin >> s;
+	int k; cin >> k;
+
+	if(k > s.size()) cout << 0 << endl;
+
+	else{
+		set<string> st;
+		REP(i,s.length()-k+1){
+			st.insert(s.substr(i,k));
+		}
+		cout << st.size() << endl;
+	}
 
 	return 0;
 
