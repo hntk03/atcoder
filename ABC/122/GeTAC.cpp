@@ -21,23 +21,25 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int N; cin >> N;
-	vector<int> h(N,0);
-	REP(i,N){
-		cin >> h[i];
-	}
-	vector<int> dp(N, 0);
-
-	dp[0] = 0;
-	dp[1] = abs(h[1] - h[0]);
-
-	FOR(i,2,N){
-		int a = dp[i-1] + abs(h[i-1] - h[i]);
-		int b = dp[i-2] + abs(h[i-2] - h[i]);
-		dp[i] = min(a, b);
+	int N, Q; cin >> N >> Q;
+	string S; cin >> S;
+	vector<int> l(Q);
+	vector<int> r(Q);
+	REP(i,Q){
+		cin >> l[i] >> r[i];
 	}
 
-	cout << dp[N-1] << endl;
+	vector<int> sum(N+1, 0);
+	FOR(i,1,N){
+		sum[i+1] = sum[i];
+		if(S[i-1] == 'A' and S[i] == 'C') sum[i+1]++;
+	}
+
+	REP(i,Q){
+		int ans = sum[r[i]] - sum[l[i]];
+		cout << ans << endl;
+	}
+
 
 	return 0;
 
