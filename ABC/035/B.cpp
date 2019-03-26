@@ -21,10 +21,11 @@ typedef vector<string> VS;
 
 int main(void){
 
-	String S; cin >> S;
+	string S; cin >> S;
 	int T; cin >> T;
 	int x,y;
 	x = y = 0;
+	int cnt = 0;
 	REP(i,S.length()){
 		switch(S[i]){
 			case 'L':
@@ -40,13 +41,19 @@ int main(void){
 				y--;
 				break;
 			case '?':
-
+				cnt++;
 				break;
-
 		}
-
 	}
 
+	int dist = abs(x) + abs(y);
+	if(T == 1) dist += cnt;
+	else{
+		dist -= cnt;
+		if(dist < 0) dist &= 1;
+	}
+
+	cout << dist << endl;
 
 	return 0;
 

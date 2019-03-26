@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <cmath>
 #include <bits/stdc++.h>
 
 
@@ -17,23 +15,30 @@ typedef vector<string> VS;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
 
-long long int func(long long n, long long x){
-	if(n >= 0) return n/(x+1);
-	else if(n < 0) return 0;
-
-	return 0;
-}
 
 
 int main(void){
 
+	int N, Q; cin >> N >> Q;
 
-	long long a, b, x; cin >> a >> b >> x;
-	int ans = func(b,x) - func(a,x);
+	vector<int> v(N+1,0);
+	
+	REP(i,Q){
+		int l, r; cin >> l >> r;
+		v[l-1]++;
+		v[r]--;
+	}
+
+	FOR(i,1,N){
+		v[i] += v[i-1];
+	}
+
+	string ans = "";
+	REP(i,N){
+		ans += (char)(v[i] % 2 + '0');
+	}
+
 	cout << ans << endl;
-
-
-
 	return 0;
 
 }
