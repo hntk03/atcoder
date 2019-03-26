@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <cmath>
-#include <string>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 
 
@@ -19,21 +17,25 @@ typedef vector<string> VS;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
 
+#define MAX 2000001
 
 
 int main(void){
 
-	int N,T; scanf("%d %d", &N, &T);
-	int a[100000];
-	REP(i,N) scanf("%d", &a[i]);
+	int N, T; cin >> N >> T;
+	vector<int> A(N);
+	REP(i,N) cin >> A[i];
 
 	int ans = 0;
-	REP(i,N-1){
-
-
-
-
+	FOR(i,1,N){
+		if(A[i] - A[i-1] > T){
+			ans += T;
+		}else{
+			ans += A[i] - A[i-1];
+		}
 	}
+	ans += T;
+	cout << ans << endl;
 
 
 	return 0;

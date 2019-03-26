@@ -21,24 +21,24 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int N; scanf("%d", &N);
-	// int a[100];
-	int a;
+	int N; cin >> N;
+	vector<int> a(N);
+	REP(i,N) cin >> a[i];
 
-	int sum = 0;
-	REP(i,N){
-		scanf("%d", a);
-		sum += a;
-	}
-
-	if(sum %N == 0){
+	int sum = accumulate(a.begin(), a.end(), 0);
+	int ave = sum / N;
+	int ans = 0;
+	if(sum % N == 0){
+		sum = 0;
 		REP(i,N){
-		
+			if(sum != i*ave) ans++;
+			sum += a[i];
 		}
-
+		cout << ans << endl;
 	}else{
-		printf("-1\n");
+		cout << -1 << endl;
 	}
+
 	return 0;
 
 }

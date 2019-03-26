@@ -21,37 +21,15 @@ typedef vector<string> VS;
 
 int main(void){
 
-	string Sa, Sb, Sc; cin >> Sa >> Sb >> Sc;
+	string s[3];
+	REP(i,3) cin >> s[i];
+	int idx[3] = {0};
+	int curr = 0;
 
-	int idx_a = 1;
-	int idx_b = 0;
-	int idx_c = 0;
-	char turn = Sa[0];
-	while(true){
-		switch(turn){
-			case 'a':
-				turn = Sa[idx_a];
-				idx_a++;
-				break;
-			case 'b':
-				turn = Sb[idx_b];
-				idx_b++;
-				break;
-			case 'c':
-				turn = Sc[idx_c];
-				idx_c++;
-				break;
-		}
-		if(idx_a == Sa.length() and turn == 'a'){
-			cout << 'A' << endl;
-			return 0;
-		}
-		else if(idx_b == Sb.length() and turn == 'b'){
-			cout << 'B' << endl;
-			return 0;
-		}
-		else if(idx_c == Sc.length() and turn == 'c'){
-			cout << 'C' << endl;
+	while(1){
+		curr = s[curr][idx[curr]++] - 'a';
+		if(idx[curr] >= s[curr].size()){
+			cout << char('A' + curr) << endl;
 			return 0;
 		}
 	}

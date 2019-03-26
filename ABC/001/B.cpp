@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <cmath>
-#include <string>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 
 
@@ -23,29 +21,26 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int m;
-	scanf("%d", &m);
+	int m; cin >> m;
 
-	char vv[] = "00";
-
-	if(m >= 100 && m <= 5000){
-		m *= 10;
-		vv[1] = m /1000 + '0';
-		vv[0] = m /100 + '0';
-	}else if(m >= 6000 && m <= 30000){
-		vv[1] = (m+50) /1000 + '0';
-		vv[0] = (m+50) /100+ '0';
-	}else if(m >= 35000 && m <= 70000){
-		m = (m - 30)/5 + 80+ '0';
-		vv[1] = m /1000+ '0';
-		vv[0] = m /100+ '0';
+	if(m < 100){
+		cout << "00" << endl;
+	}else if(m >= 100 and m < 5001){
+		if(m < 1000) cout << "0" << m / 100 << endl;
+		else cout << m / 100 << endl;
+	}else if(m >= 6000 and m < 30001){
+		m /= 1000;
+		m += 50;
+		cout << m << endl;
+	}else if(m >= 35000 and m < 70001){
+		m /= 1000;
+		m -= 30;
+		m /= 5;
+		m += 80;
+		cout << m << endl;
 	}else{
-		vv[1] = '8';
-		vv[0] = '9';
+		cout << "89" << endl;
 	}
-
-	
-	printf("%s\n",vv);
 
 
 	return 0;
