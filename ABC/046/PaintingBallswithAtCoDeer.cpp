@@ -19,18 +19,15 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int n; cin >> n;
+	int N, K; cin >> N >> K;
 
-	int ans = 1 << 30;
-	FOR(i,1,n+1){
-		int x = n / i;
-		ans = min(ans, abs(i-x)+n-(i*x));
+	int ans = 1;
+	FOR(i,1,N){
+		ans *= (K-1);
 	}
+	ans *= K;
 
 	cout << ans << endl;
-
-	
-
 
 	return 0;
 
