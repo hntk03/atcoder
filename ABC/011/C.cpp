@@ -20,25 +20,28 @@ const int INF = 1 << 30;
 
 int main(void){
 
-		
+
 	int N; cin >> N;
-	vector<int> NG(3);
-	REP(i,3) cin >> NG[i];
-	vector<int> dp(N+5);
-	REP(i,N+5) dp[i] = INF;
+	vector<bool> NG(N, false);
+	REP(i,3){
+		int x; cin >> x;
+		NG[x] = true;
+	}
+	vector<int> dp(N+1, INF);
 	dp[N] = 0;
 
-	for(int i=N-1;i>=0;--i){
-		dp[i] = min({dp[i], dp[i+1]+1, dp[i+2]+1, dp[i+3]+1});
+	for(int i=N;i>=0;--i){
+		if(NG[i]) continue;
+		FOR(j,1,3+1){
+			if(i-j >= 0){
+				dp[i-j] = min(dp[i]+1, dp[i-j]);
+			}
+		}
 	}
 
-	bool flag = true;
-	REP(i,3){ 
-		if(dp[NG[i]] != INF) flag = false;
-	}
-	if(dp[0] == INF) flag = false;
+	if(dp[0] <= 100) cout << "YES" << endl;
+	else cout << "NO" << endl;
 
-	cout << (flag ? "YES" : "NO") << endl;
 	return 0;
 
 }
