@@ -17,6 +17,7 @@ typedef vector<string> VS;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
 
+const int MAX = 1 << 30;
 
 
 int main(void){
@@ -28,16 +29,16 @@ int main(void){
 	}
 	vector<int> dp(N, 0);
 
+	dp[0] = 0;
 
-	FOR(i,K,N){
-
-		int _m = 1 << 30;
+	FOR(i,1,N+1){
+		int m = 1 << 30;
 		FOR(j,1,K+1){
 			if(i-j >= 0){
-				_m = min(dp[i-j] + abs(h[i-j] - h[i]),_m);
+				m = min(dp[i-j] + abs(h[i-j] - h[i]), m);
 			}
+			dp[i] = m;
 		}
-		dp[i] = _m;
 	}
 
 	cout << dp[N-1] << endl;

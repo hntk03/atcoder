@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <cmath>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <cstring>
+#include <bits/stdc++.h>
 
 
 
@@ -20,47 +15,31 @@ typedef vector<string> VS;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
 
-#define N_MAX 101
-#define P_MAX 10000
-
-
-
-int N;
-int p[100];
-int ans = 0;
-
-int dp[N_MAX][P_MAX];
-
-int rec(int i,int point){
-	
-	if(dp[i][point] != -1){
-		return ;
-	}
-	if(i == N && dp[i][point] == -1){
-		dp[i][point] = point;
-		ans++;
-		return ;
-	}else{
-		dp[i][p[i]+point] = p[i]+point;
-		dp[i][point] = point;
-
-		rec(i+1,p[i]+point);
-		rec(i+1,point);
-	}
-}
 
 
 int main(void){
 
-	memset(dp, -1, sizeof(dp));
+	int N; cin >> N;
+	vector<int> p(N);
+	REP(i,N) cin >> p[i];
 
-	scanf("%d", &N);
-	REP(i,N) scanf("%d", &p[i]);
+	vector<bool> dp(10001, false);
 
-	rec(0,0);
-	printf("%d\n", ans);
+	// dpの要素は得点，その得点がありえるか
+	dp[0] = true;
 
+	REP(i,N){
+		for(int j = 10000;j >= 0;--j){
+			if(dp[j] == true){
+				dp[j+p[i]] = true;
+			}
+		}
+	}
 
+	int ans = 0;
+	ans = count(dp.begin(), dp.end(), true);
+
+	cout << ans << endl;
 
 	return 0;
 
