@@ -19,22 +19,14 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int N; cin >> N;
-	vector<int> h(N);
-	REP(i,N) cin >> h[i];
+	long long N; cin >> N;
+	long long A, B, C, D, E; cin >> A >> B >> C >> D >> E;
+	long long minnum = min({A, B, C, D, E});
 
-	int ans = 0;
-	int active = 0;
+	long long ans = ((N + minnum - 1) / minnum) + 4;
 
-	REP(i,N){
-		if(active >= h[i]){
-			active = h[i];
-		}else{
-			ans += h[i] - active;
-			active = h[i];
-		}
-	}
 	cout << ans << endl;
+
 
 
 	return 0;

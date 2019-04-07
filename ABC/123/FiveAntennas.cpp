@@ -19,22 +19,19 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int N; cin >> N;
-	vector<int> h(N);
-	REP(i,N) cin >> h[i];
+	vector<int> v(5);
+	REP(i,5) cin >> v[i];
 
-	int ans = 0;
-	int active = 0;
+	int k; cin >> k;
 
-	REP(i,N){
-		if(active >= h[i]){
-			active = h[i];
-		}else{
-			ans += h[i] - active;
-			active = h[i];
+	bool ans = true;
+	REP(i,4){
+		FOR(j,i+1,5){
+			if(v[j]-v[i] > k) ans = false;
 		}
 	}
-	cout << ans << endl;
+
+	cout << (ans ? "Yay!" : ":(") << endl;
 
 
 	return 0;

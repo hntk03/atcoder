@@ -19,21 +19,25 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int N; cin >> N;
-	vector<int> h(N);
-	REP(i,N) cin >> h[i];
-
-	int ans = 0;
-	int active = 0;
-
-	REP(i,N){
-		if(active >= h[i]){
-			active = h[i];
-		}else{
-			ans += h[i] - active;
-			active = h[i];
-		}
+	
+	vector<int> v(5);
+	vector<pair<int, int>> p(5);
+	REP(i,5){
+		int v; cin >> v;
+		int amari = v % 10;
+		if(amari == 0) amari = 9;
+		p[i] = make_pair(amari, v);
 	}
+
+	SORT(p);
+	int ans = 0;
+	for(int i=4;i>0;--i){
+		if((p[i].second % 10) > 0) p[i].second += (10 - p[i].second % 10);
+		ans += p[i].second;
+	}
+	ans += p.front().second;
+
+
 	cout << ans << endl;
 
 

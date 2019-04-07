@@ -19,23 +19,22 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int N; cin >> N;
-	vector<int> h(N);
-	REP(i,N) cin >> h[i];
+	int N, M; cin >> N >> M;
+	vector<int> X(M);
+	REP(i,M) cin >> X[i];
+
+	SORT(X);
+	
+	vector<int> v(M-1);
+	REP(i,M-1) v[i] = X[i+1]-X[i];
+	SORT(v);
 
 	int ans = 0;
-	int active = 0;
-
-	REP(i,N){
-		if(active >= h[i]){
-			active = h[i];
-		}else{
-			ans += h[i] - active;
-			active = h[i];
-		}
+	REP(i,M-N){
+		ans += v[i];
 	}
-	cout << ans << endl;
 
+	cout << ans << endl;
 
 	return 0;
 

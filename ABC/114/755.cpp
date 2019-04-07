@@ -15,25 +15,30 @@ typedef vector<string> VS;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
 
+long long N;
+long long ans = 0;
+
+void dfs(long long v, int a, int b, int c){
+
+	if(v > N) return ;
+	else if(v >= 1 and v <= N and a > 0 and b > 0 and c > 0){
+		ans++;
+	}
+
+	dfs(10*v+7,a+1, b, c);
+	dfs(10*v+5, a, b+1, c);
+	dfs(10*v+3, a, b, c+1);
+
+	return ;
+
+}
 
 
 int main(void){
 
-	int N; cin >> N;
-	vector<int> h(N);
-	REP(i,N) cin >> h[i];
 
-	int ans = 0;
-	int active = 0;
-
-	REP(i,N){
-		if(active >= h[i]){
-			active = h[i];
-		}else{
-			ans += h[i] - active;
-			active = h[i];
-		}
-	}
+	cin >> N;
+	dfs(0,0,0,0);
 	cout << ans << endl;
 
 
