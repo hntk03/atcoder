@@ -16,18 +16,28 @@ typedef vector<string> VS;
 #define REP(i,n)  FOR(i,0,n)
 
 
+int N;
+
+void dfs(string S){
+
+	if(S.length() == N){
+		cout << S << endl;
+		return ;
+	}else{
+
+		dfs(S+'a');
+		dfs(S+'b');
+		dfs(S+'c');
+
+	}
+
+	return ;
+}
 
 int main(void){
 
-	int X; cin >> X;
-	int sum = 0;
-
-	REP(i,X){
-		if(sum == X){
-			cout << i << endl;
-			return 0;
-		}
-	}
+	cin >> N;
+	dfs("");
 
 
 	return 0;
