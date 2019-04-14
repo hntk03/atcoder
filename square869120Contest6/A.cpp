@@ -19,23 +19,19 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int N; cin >> N;
-	map<int> odd;
-	map<int> even;
+	int N, T; cin >> N >> T;
+	vector<int> A(N-1);
+	REP(i,N-1) cin >> A[i];
 
-	REP(i,N){ 
-		int v; cin >> v;
-		if(i%2 == 0) even[v]++;
-		else odd[v]++;
+	int sum = 0;
+	REP(i,N-1){
+		sum += A[i];
 	}
 
-	for(value:odd){
+	int ans = sum / T;
+	if(sum % T != 0) ans++;
 
-
-	}
-
-
-
+	cout << ans << endl;
 
 	return 0;
 
