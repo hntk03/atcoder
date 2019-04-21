@@ -22,25 +22,29 @@ int main(void){
 	int N; cin >> N;
 	string S; cin >> S;
 
-	int idx = 0;
-	REP(i,N){
-		if(S[i] == '#'){
-			idx = i;
-			if(S[min(i+1,N-1)] == '.') break;
-			else{
-				idx = min(i+1,N-1);
-			}
+	vector<int> white(N+1, 0);
+	vector<int> black(N+1, 0);
+
+	FOR(i,1,N+1){
+		if(S[i-1] == '.'){ 
+			white[i] = white[i-1] + 1;
+			black[i] = black[i-1];
+		}else if(S[i-1] == '#'){
+			white[i] = white[i-1];
+			black[i] = black[i-1] + 1;
 		}
 	}
-
-	S = S.substr(idx);
-
-	int white = count(S.begin(), S.end(), '.');
-	int black = count(S.begin(), S.end(), '#');
 	
-	int ans = min(white, black);
+	int ans = 1 << 30;
+	REP(i,N){
+		int to_white = black[i+1] - black[0];
+		int to_black = white[N] - white[i+1];
+		ans = min(ans, to_white + to_black);
+	}
 
 	cout << ans << endl;
+
+
 	return 0;
 
 }
