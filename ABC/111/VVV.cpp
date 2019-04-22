@@ -20,20 +20,14 @@ typedef vector<string> VS;
 int main(void){
 
 	int N; cin >> N;
-	map<int> odd;
-	map<int> even;
-
-	REP(i,N){ 
+	vector<pair<int,int>> odd(N);
+	vector<pair<int,int>> even(N);
+	REP(i,N){
 		int v; cin >> v;
-		if(i%2 == 0) even[v]++;
-		else odd[v]++;
-	}
-
-	for(value:odd){
+		if(i%2 == 0) even.push_back(make_pair())
 
 
 	}
-
 
 
 
