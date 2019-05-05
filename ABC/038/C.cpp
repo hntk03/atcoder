@@ -20,16 +20,21 @@ typedef vector<string> VS;
 int main(void){
 
 	int N; cin >> N;
-	int sum = 0;
-	FOR(i,1,10) FOR(j,1,10) sum += (i * j);
+	vector<int> a(N);
+	REP(i,N) cin >> a[i];
 
-	int p = sum - N;
+	int l, r;
+	l = r = 0;
+	int ans = 0;
 
-	FOR(i, 1, 10){
-		int quotient = p / i;
-		if(p % i == 0 and quotient < 10) cout << i << " x " << quotient << endl;
+	while(l < N){
+		int p = l;
+		while(a[p++] <= a[r] and r < N) r++;
+		ans += (r-l+1);
+		l++;
 	}
 
+	cout << ans << endl;
 
 	return 0;
 
