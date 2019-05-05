@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <cmath>
 #include <bits/stdc++.h>
 
 
@@ -21,22 +19,21 @@ typedef vector<string> VS;
 
 int main(void){
 
-	int n[5];
-	int ans[20] = {0};
-	REP(i,5) scanf("%d", &n[i]);
+	int N = 5;
+	vector<int> v(N);
+	REP(i,N) cin >> v[i];
+	vector<int> c;
 
-	int p = 0;
-	REP(i,5){
-		FOR(j,i+1,5){
-			FOR(k,j+1,5){
-				ans[p] = n[i]+n[j]+n[k];
-					p++;
+	REP(i,N-2){
+		FOR(j, i+1, N-1){
+			FOR(k, j+1, N){
+				c.push_back(v[i]+v[j]+v[k]);
 			}
 		}
 	}
 
-	sort(ans,ans+20);
-	printf("%d\n",ans[17]);
+	SORT(c);
+	cout << c[c.size()-3] << endl;
 
 	return 0;
 
