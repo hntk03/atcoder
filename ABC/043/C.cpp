@@ -20,16 +20,20 @@ typedef vector<string> VS;
 int main(void){
 
 	int N; cin >> N;
-	N = N % 30;
-	string card = "123456";
+	vector<int> a(N);
+	REP(i,N) cin >> a[i];
 
-	REP(i,N){
-		int l = i % 5;
-		int r = i % 5 + 1;
-		swap(card[l], card[r]);
+	int ans = 1 << 30;
+	FOR(i,-100,101){
+		int sum = 0;
+		REP(j,N) sum += abs((int)pow(i-a[j],2));
+		ans = min(ans, sum);
 	}
 
-	cout << card << endl;
+	cout << ans << endl;
+
+
+
 
 	return 0;
 
