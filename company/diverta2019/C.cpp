@@ -32,8 +32,8 @@ int main(void){
 			if(s[i].substr(j,2) == "AB") ans++;
 		}
 		if(s[i].back() == 'A' and s[i].front() == 'B') ba++;
-		if(s[i].back() == 'A') last_a++;
-		if(s[i].front() == 'B') first_b++;
+		if(s[i].back() == 'A' and s[i].front() != 'B') last_a++;
+		if(s[i].front() == 'B' and s[i].back() != 'A') first_b++;
 	}
 	if(last_a == 0 and first_b == 0 and ba > 0) ans += ba-1;
 	else ans += min(last_a+ba, first_b+ba);
