@@ -19,34 +19,27 @@ typedef vector<string> VS;
 
 int gcd(int a, int b){
 
-	if(b < a){
-		int tmp = a;
-		a = b;
-		b = a;
-	}
+	if(b < a) swap(a, b);
 
 	if(a == 0) return b;
-	else return gcd(b%a,a);
+	else return gcd(a, b%a);
+
 
 }
-
 
 int main(void){
 
-	int N; scanf("%d", &N);
-
-	int A[N];
-	REP(i,N){ 
-		scanf("%d", &A[i]);
+	int N; cin >> N;
+	int ans; cin >> ans;
+	REP(i,N-1){
+		int A; cin >> A;
+		ans = gcd(ans, A);
 	}
 
-	int ans = A[0];
-	FOR(i,1,N){
-		ans = gcd(ans,A[i]);
-	}
-
-	printf("%d\n", ans);
-
+	cout << ans << endl;
 	return 0;
 
 }
+
+
+
