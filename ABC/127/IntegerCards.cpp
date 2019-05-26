@@ -20,30 +20,28 @@ typedef vector<string> VS;
 int main(void){
 
 	long long int N, M; cin >> N >> M;
-	vector<long long int> A(N);
-	vector<long long int> B(M);
-	vector<long long int> C(M);
-	vector<long long int> sum(N+1, 0);
-
+	priority_queue<pair<long long int, long long int>> que;
 	REP(i,N){
-		cin >> A[i];
+		long long int A; cin >> A;
+		que.push(make_pair(A, 1));
 	}
-	SORT(A);
-	FOR(i,1,N+1){
-		sum[i] = sum[i-1] + A[i-1];
-	}
-
-	REP(i,M) cin >> B[i] >> C[i];
-
-
-	long long int ans = sum[N];
 	REP(i,M){
-		long long int idx = B[i];
-		if(sum[idx] < idx*C[i]){
-			ans -= sum[idx];
-			ans += idx*C[i];
-			sum[idx] = idx*C[i];
+		long long int B, C; cin >> B >> C;
+		que.push(make_pair(C, B));
+	}
+
+	long long int cnt = 0;
+	long long int ans = 0;
+	while(cnt != N){
+		if(que.top().second + cnt <= N){
+			ans += que.top().first * que.top().second;
+			cnt += que.top().second;
+		}else{
+			long long int c = N - cnt;
+			ans += c * que.top().first;
+			cnt += c;
 		}
+		que.pop();
 	}
 
 	cout << ans << endl;
