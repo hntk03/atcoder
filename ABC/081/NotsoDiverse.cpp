@@ -20,21 +20,24 @@ typedef vector<string> VS;
 int main(void){
 
 	int N, K; cin >> N >> K;
+	
 	vector<int> cnt(N+1, 0);
-
 	REP(i,N){
-		int A; cin >> A;
-		cnt[A]++;
+		int a; cin >> a;
+		cnt[a]++;
 	}
 
 	SORT(cnt);
 
-	int ans = 0;
-	REP(i,N-K){
-		ans += cnt[i];
+	int sum = 0;
+	REP(i,K){
+		sum += cnt[N-i];
 	}
 
+	int ans = N - sum;
 	cout << ans << endl;
+
+
 
 	return 0;
 

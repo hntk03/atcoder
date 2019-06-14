@@ -24,31 +24,19 @@ int main(void){
 
 	int N, M; cin >> N >> M;
 	vector<int> a(M);
-	vector<int> dp(N+1, 1<<30);
+	vector<int> dp(N+1,0);
 	dp[1] = 1;
-	dp[2] = 1;
 	REP(i,M){ 
 		cin >> a[i];
-		dp[a[i]] = -1;
 	}
 
-	long long ans = 0;
 
-	FOR(i,3,N+1){
-		if(dp[i] == -1 and dp[i-1] == -1){
-			ans = 0;
-			break;
-		}if(dp[i] != -1 and dp[i-1] != -1){
-			dp[i] = min(dp[i], dp[i-1]+1);
-			ans = (ans+1)%m;
-			ans++;
-		}if(dp[i] != -1 and dp[i-2] != -1){
-			dp[i] = min(dp[i], dp[i-2]+1);
-			ans = (ans+1)%m;
-		}
+	FOR(i,2,N+1){
+		if(a[i] == i) dp[i] = 0;
+		dp[i] = (dp[i-1] + dp[i-2]) % m;
 	}
 
-	cout << ans << endl;
+	cout << dp[N] << endl;
 
 	return 0;
 
