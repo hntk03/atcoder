@@ -1,12 +1,6 @@
 #include <bits/stdc++.h>
 
-
-
 using namespace std;
-
-typedef vector<int> VI;
-typedef vector<string> VS;
-
 
 //container util
 #define SORT(c) sort((c).begin(),(c).end())
@@ -16,34 +10,33 @@ typedef vector<string> VS;
 #define REP(i,n)  FOR(i,0,n)
 
 
-
 int main(void){
 
 	int N; cin >> N;
 	vector<int> t(N+1);
 	vector<int> x(N+1);
 	vector<int> y(N+1);
-	t[0] = 0;
-	x[0] = 0;
-	y[0] = 0;
+	t[0] = x[0] = y[0] = 0;
 	FOR(i,1,N+1) cin >> t[i] >> x[i] >> y[i];
+
 
 	FOR(i,1,N+1){
 		int dt = t[i] - t[i-1];
-		int dx = x[i] - x[i-1];
-		int dy = y[i] - y[i-1];
-		bool good1 = ((abs(dx) + abs(dy)) <= dt);
-		bool good2 = ((dx+dy)%2 == dt%2);
-		if(good1 == false or good2 == false){
+		int dx = abs(x[i] - x[i-1]);
+		int dy = abs(y[i] - y[i-1]);
+
+		if(dx+dy <= dt and (dx+dy)%2 == dt %2) continue;
+		else{ 
 			cout << "No" << endl;
 			return 0;
 		}
-
-
 	}
 
-
 	cout << "Yes" << endl;
+
+
+
+
 	return 0;
 
 }
