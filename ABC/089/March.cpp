@@ -1,12 +1,6 @@
 #include <bits/stdc++.h>
 
-
-
 using namespace std;
-
-typedef vector<int> VI;
-typedef vector<string> VS;
-
 
 //container util
 #define SORT(c) sort((c).begin(),(c).end())
@@ -16,30 +10,30 @@ typedef vector<string> VS;
 #define REP(i,n)  FOR(i,0,n)
 
 
-
 int main(void){
 
-	string s = "MARCH";
-	int c[5] = {0};
-
 	int N; cin >> N;
+	vector<long long> cnt(5, 0);
 	REP(i,N){
-		string t; cin >> t;
-		REP(j,5){
-			if(t[0] == s[j]) c[j]++;
-		}
+		string s; cin >> s;
+		if(s[0] == 'M') cnt[0]++;
+		else if(s[0] == 'A') cnt[1]++;
+		else if(s[0] == 'R') cnt[2]++;
+		else if(s[0] == 'C') cnt[3]++;
+		else if(s[0] == 'H') cnt[4]++;
 	}
 
-	int ans = 0;
-	REP(i,5){
-		FOR(j,i+1,5){
-			FOR(k,j+1,5){
-				ans += c[i]*c[j]*c[k];
-			}
-		}
+	int P[10] = {0,0,0,0,0,0,1,1,1,2};
+	int Q[10] = {1,1,1,2,2,3,2,2,3,3};
+	int R[10] = {2,3,4,3,4,4,3,4,4,4};
+
+	long long int ans = 0;
+	REP(i,10){
+		ans += cnt[P[i]]*cnt[Q[i]]*cnt[R[i]];
 	}
 
 	cout << ans << endl;
+
 	return 0;
 
 }
