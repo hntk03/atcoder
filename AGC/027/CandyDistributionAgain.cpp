@@ -15,31 +15,24 @@ int main(void){
 
 	int N, x; cin >> N >> x;
 	vector<int> a(N);
-	int sum = 0;
 	REP(i,N){ 
 		cin >> a[i];
-		sum += a[i];
 	}
 
 	SORT(a);
 
+	int k = 0;
+	int sum = 0;
 	int ans = 0;
-	if(sum == x){
-		ans = N;
-	}else{
-		sum = 0;
-		int idx = 0;
-		REP(i,N){
-			cout << "a[i]:" << a[i] << endl;
-			sum += a[i];
-			if(sum <= x) idx++;
-			else{
-				break;
-			}
-		}
-		ans = idx - 1;
+	REP(i,N){
+		sum += a[i];
+		if(sum <= x) k++;
+		else break;
 	}
-
+	if(k == N){
+		if(sum == x) ans = N;
+		else ans = N - 1;
+	}else ans = k;
 
 	cout << ans << endl;
 
