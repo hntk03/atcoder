@@ -1,12 +1,7 @@
 #include <bits/stdc++.h>
 
-
-
 using namespace std;
-
-typedef vector<int> VI;
-typedef vector<string> VS;
-
+using ll = long long;
 
 //container util
 #define SORT(c) sort((c).begin(),(c).end())
@@ -15,60 +10,51 @@ typedef vector<string> VS;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
 
-string s; 
-string t; 
-
-int S;
-int T;
-
+string S, T;
 
 bool match(int k){
 
-	REP(i,T){
-		if(t[i] != s[i+k] and s[i+k] != '?'){
-			return false;
-		}
+	REP(i,T.length()){
+		if(S[i+k] == T[i] or S[i+k] == '?') continue;
+		else return false;
 	}
 
 	return true;
 
 }
 
-string construct(int k){
-
-	string ans = s;
-	REP(i,T){
-		ans[i+k] = t[i];
-	}
-
-	REP(i,S){
-		if(ans[i] == '?') ans[i] = 'a';
-	}
-
-	return ans;
-
-}
-
 
 int main(void){
 
-	cin >> s;
-	cin >> t;
 
-	S = s.length();
-	T = t.length();
+	cin >> S >> T;
 
-	bool ans = false;
-	REP(i,S-T+1){
-		ans = match(i);
-		if(ans == true){
-			cout << construct(i) << endl;
-			return 0;
+	int N = S.length() - T.length();
+	int idx = -1;
+	REP(i,N+1){
+		if(match(i) == true) idx = i;
+	}
+
+	if(idx == -1){
+		cout << "UNRESTORABLE" << endl;
+	}else{
+		REP(i,S.length()){
+			if(i < idx){
+				if(S[i] == '?') cout << 'a';
+				else cout << S[i];
+			}else if(i < idx + T.length()) cout << T[i-idx];
+			else{
+				if(S[i] == '?') cout << 'a';
+				else cout << S[i];
+			}
 		}
+		cout << endl;
 	}
 
 
-	cout << "UNRESTORABLE" << endl;
+
+
+
 
 	return 0;
 

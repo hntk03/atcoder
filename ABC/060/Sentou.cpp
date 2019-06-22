@@ -1,12 +1,7 @@
 #include <bits/stdc++.h>
 
-
-
 using namespace std;
-
-typedef vector<int> VI;
-typedef vector<string> VS;
-
+using ll = long long;
 
 //container util
 #define SORT(c) sort((c).begin(),(c).end())
@@ -14,7 +9,6 @@ typedef vector<string> VS;
 //repetition
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
-
 
 
 int main(void){
@@ -25,11 +19,13 @@ int main(void){
 
 	int ans = 0;
 	FOR(i,1,N){
-		int d = t[i] - t[i-1];
-		ans = min(T, d);
+		if(t[i]-t[i-1] > T) ans += T;
+		else ans += t[i] - t[i-1];
 	}
-
+	ans += T;
+	
 	cout << ans << endl;
+
 
 	return 0;
 
