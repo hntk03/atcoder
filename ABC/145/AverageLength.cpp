@@ -16,27 +16,25 @@ int main(void){
 	int N; cin >> N;
 	vector<int> x(N);
 	vector<int> y(N);
-	REP(i,N) cin >> x[i] >> y[i];
+	vector<int> idx(N);
+	REP(i,N){
+		cin >> x[i] >> y[i];
+		idx[i] = i;
+	}
 
+	int cnt = 0;
 	double ans = 0.0;
-	int cnt = 1;
-	int tmp = N;
-	while(tmp > 0){
-		cnt *= tmp;
-		tmp--;
-	}
-
-	REP(i,N-1){
-		FOR(j,i+1,N){
-			ans += sqrt(pow(x[i]-x[j], 2)+pow(y[i]-y[j], 2)) * 2;
+	do{
+		double d = 0.0;
+		FOR(i,1,N){
+			d += sqrt(pow(x[i]-x[i-1],2) + pow(y[i]-y[i-1], 2));
 		}
-	}
+		ans += d;
+		cnt++;
+	}while(next_permutation(idx.begin(), idx.end()));
 
-	ans *= 2;
 	ans /= cnt;
 	cout << ans << endl;
-	
-
 
 	return 0;
 
