@@ -14,26 +14,24 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N, M; cin >> N >> M;
-	vector<int> X(M);
 
-	REP(i,M) cin >> X[i];
-	SORT(X);
+	int N; cin >> N;
+	vector<int> A(N);
 
-	vector<int> Y(M-1);
-	FOR(i,1,M){
-		Y[i-1] = X[i] - X[i-1];
+	REP(i,N){ 
+		int a; cin >> a;
+		A[i] = a - (i+1);
 	}
 
-	SORT(Y);
+	SORT(A);
+	ll ans = 0;
 
-	int ans = 0;
-	REP(i,M-(N-1)-1){
-		ans += Y[i];
+	int b = A[N/2];
+	REP(i,N){
+		ans += abs(A[i] - b);
 	}
 
 	cout << ans << endl;
-
 
 	return 0;
 
