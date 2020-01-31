@@ -13,30 +13,27 @@ using ll = long long;
 
 int main(void){
 
-	
 	ll A, B, X; cin >> A >> B >> X;
 
-	ll N = 1;
-	ll d = 1;
-	ll ans = 0;
-
-	while((A*N+B*d)<X){
-		N *= 10;
-		d++;
-	}
-	N--;
-	d--;
-
-	while(N){
-		if(A*N+B+d <= X){
-			ans = N;
-			break;
+	ll l = 0, r = ll(1e9+1);
+	auto keta = [&](ll c){
+		int res = 0;
+		while(c){
+			c/= 10;
+			res++;
 		}
-		N--;
+		return res;
+	};
+	auto f = [&](ll c){
+		return A * c + B*keta(c);
+	};
+	while(r-l > 1){
+		ll c = (l+r)/2;
+		if(f(c) <= X) l = c;
+		else r = c;
 	}
-	if(N == -1) ans = 0;
 
-	cout << ans << endl;
+	cout << l << endl;
 
 	return 0;
 
