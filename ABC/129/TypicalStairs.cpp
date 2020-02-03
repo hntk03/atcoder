@@ -1,12 +1,7 @@
 #include <bits/stdc++.h>
 
-
-
 using namespace std;
-
-typedef vector<int> VI;
-typedef vector<string> VS;
-
+using ll = long long;
 
 //container util
 #define SORT(c) sort((c).begin(),(c).end())
@@ -15,28 +10,30 @@ typedef vector<string> VS;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
 
-const long long m = 1000000007;
- 
-
+const int INF = 1e9;
 
 int main(void){
 
-
 	int N, M; cin >> N >> M;
-	vector<int> a(M);
-	vector<int> dp(N+1,0);
-	dp[1] = 1;
-	REP(i,M){ 
-		cin >> a[i];
+	vector<bool> broken(N+1, false);
+	REP(i,M){
+		int a; cin >> a;
+		broken[a] = true;
 	}
 
-
-	FOR(i,2,N+1){
-		if(a[i] == i) dp[i] = 0;
-		dp[i] = (dp[i-1] + dp[i-2]) % m;
+	vector<int> dp(N+2);
+	const int mod = 1000000007;
+	dp[N] = 1;
+	for(int i=N-1;i >= 0; i--){
+		if(broken[i]){
+			dp[i] = 0;
+			continue;
+		}
+		dp[i] = (dp[i+1] + dp[i+2]) % mod;
 	}
+	
+	cout << dp[0] << endl;
 
-	cout << dp[N] << endl;
 
 	return 0;
 
