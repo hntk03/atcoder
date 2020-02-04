@@ -1,12 +1,7 @@
 #include <bits/stdc++.h>
 
-
-
 using namespace std;
-
-typedef vector<int> VI;
-typedef vector<string> VS;
-
+using ll = long long;
 
 //container util
 #define SORT(c) sort((c).begin(),(c).end())
@@ -15,60 +10,42 @@ typedef vector<string> VS;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define REP(i,n)  FOR(i,0,n)
 
-
+const int INF = 1e9;
 
 int main(void){
 
-	int N; cin >> N;
-	map<int, int> even;
+	int n; cin >> n;
+	vector<int> v(n);
+
+	REP(i,n) cin >> v[i];
+
 	map<int, int> odd;
-	REP(i,N){
-		int v; cin >> v;
-		if(i%2 == 0) even[v]++;
-		else odd[v]++;
+	map<int, int> even;
+	REP(i,n){
+		if(i%2 == 0) even[v[i]]++;
+		else odd[v[i]]++;
 	}
-	vector<pair<int, int>> e;
+
 	vector<pair<int, int>> o;
+	vector<pair<int, int>> e;
+	for(auto a: odd){
+		o.push_back(make_pair(a.second, a.first));
+	}
+	for(auto a: even){
+		e.push_back(make_pair(a.second, a.first));
+	}
 
-	for(auto t:even){
-		e.push_back(make_pair(t.second, t.first));
-	}
-	for(auto t:odd){
-		o.push_back(make_pair(t.second, t.first));
-	}
-	SORT(e);
 	SORT(o);
+	SORT(e);
 
+	
+	
 	int ans = 0;
-	int e_cnt;
-	int o_cnt;
-	if(N % 2 == 0){
-		e_cnt = o_cnt = N / 2;
+	if(o.back().second == e.back().second){
+		ans = (n/2 - o.back().first) + (n/2 - e[e.size()-2].first);
+		ans = min((n/2 - o[o.size()-2].first) + (n/2 - e.back().first), ans);
 	}else{
-		e_cnt = N / 2;
-		o_cnt = N / 2 + 1;
-	}
-
-	if(e.back().second == o.back().second){
-		int i = 2;
-		while(true){
-			if(e[N-i].second != o[N-i].second){
-				if(e[N-i].first > o[N-i].first){
-					ans = e_cnt - e[N-i].first + o_cnt - o[N-i+1].first;
-					break;
-				}else if(e[N-i].first < o[N-i].first){
-					ans = e_cnt - e[N-i+1].first + o_cnt - o[N-i].first;
-					break;
-				}else if(e[N-i].first < o[N-i].first){
-				}else{
-					i++;
-				}
-			}
-
-		}
-
-	}else{
-		ans = e_cnt - e.back().first + o_cnt - o.back().first;
+		ans = (n/2 - o.back().first) + (n/2 - e.back().first);
 	}
 
 	cout << ans << endl;
