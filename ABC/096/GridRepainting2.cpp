@@ -26,17 +26,17 @@ int main(void){
 
 	bool ans = true;
 	//上下左右
-	int x[4] = {0, 0, -1 , 1};
-	int y[4] = {1, -1, 0, 0};
+	int dx[4] = {0, 0, -1, 1};
+	int dy[4] = {1, -1, 0, 0};
 	REP(i,H){
 		REP(j,W){
 			if(s[i][j] == '.') continue;
 			int cnt = 0;
 			REP(k,4){
-				int a = i + y[k];
-				int b = j + x[k];
-				if(a > -1 and a < H and b > -1 and b < W){
-					if(s[a][b] == '#') cnt++;
+				int y = i + dy[k];
+				int x = j + dx[k];
+				if(y > -1 and y < H and x > -1 and x < W){
+					if(s[y][x] == '#') cnt++;
 				}
 			}
 		if(cnt == 0) ans = false;
