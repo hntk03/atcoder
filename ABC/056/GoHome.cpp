@@ -20,14 +20,15 @@ typedef vector<string> VS;
 int main(void){
 
 	int X; cin >> X;
-	int sum = 0;
 
-	REP(i,X){
-		if(sum == X){
-			cout << i << endl;
-			return 0;
-		}
+	int i;
+	for(i=1;;i++){
+		int sum = (i*(i+1))/2;
+		if(sum >= X) break;
 	}
+
+
+	cout << i << endl;
 
 
 	return 0;
