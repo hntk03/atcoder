@@ -27,10 +27,16 @@ ll calc(ll n, ll r){
 	ll up = 1;
 	ll down = 1;
 	REP(i,r){
-		up = (up % mod) * ((n-i) % mod);
-		down = (down % mod) * ((i+1) % mod);
+		up *= (n-i);
+		up %= mod;
+		down *= (i+1);
+		down %= mod;
 	}
-	return up / down;
+	cout << "up:" << up << "down:" << down << endl;
+
+	cout << pow_mod(down, mod-2, mod) << endl;
+	up *= pow_mod(down, mod-2, mod);
+	return up;
 }
 
 int main(void){
@@ -41,6 +47,7 @@ int main(void){
 	ans -= calc(n, a);
 	ans -= calc(n, b);
 	ans -= 1;
+	// cout << pow_mod(1) << endl;
 	cout << ans << endl;
 
 
