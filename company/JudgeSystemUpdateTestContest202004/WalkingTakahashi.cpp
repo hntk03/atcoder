@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 
+
 using namespace std;
 using ll = long long;
 
@@ -19,7 +20,6 @@ int main(void){
 	if(S >= L and S <= R) cout << S << endl;
 	else if(abs(S-R)<abs(S-L)) cout << R << endl;
 	else  cout << L << endl;
-
 
 	return 0;
 
