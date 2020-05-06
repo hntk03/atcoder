@@ -14,21 +14,13 @@ using ll = long long;
 #define pv(val) cerr << #val << '=' << (val) << endl
 
 const int INF = 1e9;
-ll A, B, N; 
-
-ll f(ll x){
-	ll a = A*x / B;
-	ll b = A * (x / B);
-	return a - b;
-
-}
 
 int main(void){
 
-	cin >> A >> B >> N;
-	ll x = min(N, B-1);
+	string s; cin >> s;
+	if(s == "ABC") cout << "ARC" << endl;
+	else cout << "ABC" << endl;
 
-	cout << f(x) << endl;
 
 	return 0;
 

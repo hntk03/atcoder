@@ -14,21 +14,29 @@ using ll = long long;
 #define pv(val) cerr << #val << '=' << (val) << endl
 
 const int INF = 1e9;
-ll A, B, N; 
-
-ll f(ll x){
-	ll a = A*x / B;
-	ll b = A * (x / B);
-	return a - b;
-
-}
 
 int main(void){
 
-	cin >> A >> B >> N;
-	ll x = min(N, B-1);
+	int N, K; cin >> N >> K;
+	vector<int> d(K);
+	bool has[101];
 
-	cout << f(x) << endl;
+	REP(i,N) has[i] = false;
+
+	REP(i, K){
+		cin >> d[i];
+		REP(j, d[i]){
+			int A; cin >> A;
+			has[A-1] = true;
+		}
+	}
+
+
+	int ans = 0;
+	REP(i,N) if(!has[i]) ans++;
+
+	cout << ans << endl;
+
 
 	return 0;
 
