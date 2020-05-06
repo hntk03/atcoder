@@ -19,56 +19,27 @@ const int INF = 1e9;
 int main(void){
 
 	
-// int N, M; 
-// vector<int> H;
-	// cin >> N >> M;
-	// H = vector<int>(N);
-	// REP(i,N) cin >> H[i];
-	// vector<int> d(N);
-	// vector<int> eq(N);
-	// REP(i,N) d[i] = i;
-	//
-	// REP(i,M){
-	// 	int A, B; cin >> A >> B;
-	// 	A--; B--;
-	// 	if(H[d[A]] < H[d[B]]) d[A] = B;
-	// 	else if(H[d[B]] < H[d[A]]) d[B] = A;
-	// 	else{
-	// 		eq[A] = eq[B] = 1;
-	// 	}
-	//
-	// }
-	//
-	//
-	// int ans = 0;
-	// REP(i,N) if(d[i] == i and eq[i] != 1) ans++;
-	//
-	// cout << ans << endl;
-	
 	int N, M; cin >> N >> M;
 	vector<int> H(N);
 	REP(i,N) cin >> H[i];
-	int graph[100005][100005];
+	vector<int> ok(N, true);
 
 	REP(i,M){
 		int A, B; cin >> A >> B;
 		A--; B--;
-		graph[A][B] = 1;
-		graph[B][A] = 1;
+		if(H[A] > H[B]) ok[B] = false;
+		else if(H[B] > H[A]) ok[A] = false;
+		else{
+			ok[A] = ok[B] = false;
+		}
 	}
 
 	int ans = 0;
 	REP(i,N){
-		REP(j,N){
-			if(graph[i][j]) 
-
-		}
-
+		if(ok[i]) ans++;
 	}
 
-	
-
-
+	cout << ans << endl;
 	return 0;
 
 }
