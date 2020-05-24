@@ -5,6 +5,7 @@ using ll = long long;
 
 //container util
 #define SORT(c) sort((c).begin(),(c).end())
+#define all(a) (a).begin(), (a).end()
 
 //repetition
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
@@ -15,43 +16,41 @@ using ll = long long;
 
 const int INF = 1e9;
 
+vector<int> to[100005];
+
 int main(void){
 
 	int N, M; cin >> N >> M;
 
-	vector<pair<int, int>> v(M);
-
 	REP(i,M){
-		int A, B; cin >> A >> B;
-		A--; B--;
-		if(B < A) swap(A, B);
-		v[i] = make_pair(A, B);
+		int a, b; cin >> a >> b;
+		--a; --b;
+		to[a].push_back(b);
+		to[b].push_back(a);
 	}
 
-	SORT(v);
+	queue<int> q;
+	vector<int> dist(N, INF);
+	vector<int> pre(N, -1);
 
-
-	vector<int> cnt(N, INF);
-	vector<int> ans(N);
-	cnt[0] = 0;
-	ans[0] = 0;
-	REP(i,M){
-		int A = v[i].first;
-		int B = v[i].second;
-		cnt[A] = min(cnt[B]+1, cnt[A]);
-		cnt[B] = min(cnt[A]+1, cnt[B]);
-	}
-
-	bool ok = true;
-	REP(i,M) if(cnt[i] == INF) ok = false;
-
-	if(ok){
-		cout << "Yes" << endl;
-		FOR(i,1,N){
-			cout << cnt[i] << endl;
+	dist[0] = 0;
+	q.push(0);
+	while(!q.empty()){
+		int v = q.front(); q.pop();
+		for(int u : to[v]){
+			if(dist[u] != INF) continue;
+			dist[u] = dist[v] + 1;
+			pre[u] = v;
+			q.push(u);
 		}
-	}else{
-		cout << "No" << endl;
+	}
+
+	cout << "Yes" << endl;
+	REP(i,N){
+		if(i == 0) continue;
+		int ans = pre[i];
+		ans++;
+		cout << ans << endl;
 	}
 
 
