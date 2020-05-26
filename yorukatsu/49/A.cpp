@@ -16,33 +16,30 @@ using ll = long long;
 
 const int INF = 1e9;
 
+bool check(vector<int> A){
+	bool ok = true;
+	REP(i,A.size()){
+		if(A[i] % 2 == 1) ok = false;
+	}
+
+	return ok;
+
+}
+
 int main(void){
 
 	int N; cin >> N;
 	vector<int> A(N);
-
 	REP(i,N) cin >> A[i];
 
-	bool dec = false;
-	bool inc = false;
 	int ans = 0;
-
-	FOR(i,1,N){
-		if(A[i] == A[i-1]) continue;
-		else if(A[i] > A[i-1] and !dec) inc = true;
-		else if(A[i] < A[i-1] and !inc) dec = true;
-		else if(A[i] > A[i-1] and dec){
-			ans++;
-			inc = false;
-			dec = false;
-		}else if(A[i] < A[i-1] and inc){
-			ans++;
-			inc = false;
-			dec = false;
-		}
+	while(check(A)){
+		REP(i,N) A[i] /= 2;
+		ans++;
 	}
-	ans++;
+
 	cout << ans << endl;
+
 
 
 	return 0;

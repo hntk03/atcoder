@@ -15,35 +15,28 @@ using ll = long long;
 #define pv(val) cerr << #val << '=' << (val) << endl
 
 const int INF = 1e9;
+const int MAX = 1e5 + 5;
 
 int main(void){
 
 	int N; cin >> N;
-	vector<int> A(N);
-
-	REP(i,N) cin >> A[i];
-
-	bool dec = false;
-	bool inc = false;
-	int ans = 0;
-
-	FOR(i,1,N){
-		if(A[i] == A[i-1]) continue;
-		else if(A[i] > A[i-1] and !dec) inc = true;
-		else if(A[i] < A[i-1] and !inc) dec = true;
-		else if(A[i] > A[i-1] and dec){
-			ans++;
-			inc = false;
-			dec = false;
-		}else if(A[i] < A[i-1] and inc){
-			ans++;
-			inc = false;
-			dec = false;
-		}
+	
+	map<int, int> mp;
+	REP(i,N){
+		int A; cin >> A;
+		mp[A]++;
 	}
-	ans++;
-	cout << ans << endl;
 
+	int ans = 0;
+	for(auto a: mp){
+		int idx = a.first;
+		int cnt = a.second;
+		
+		if(idx < cnt) ans += cnt - idx;
+		else if(cnt < idx) ans += cnt;
+	}
+
+	cout << ans << endl;
 
 	return 0;
 
