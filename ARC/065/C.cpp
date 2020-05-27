@@ -16,30 +16,28 @@ using ll = long long;
 
 const int INF = 1e9;
 
-
 int main(void){
 
-	int n; cin >> n;
+	string S; cin >> S;
+	int N = S.length();
+	reverse(all(S));
 
-	vector<int> a(n);
-	REP(i,n) cin >> a[i];
 
-	map<int, int> mp;
-	REP(i,n){
-		if(a[i] >= 3200) mp[8]++;
-		else mp[a[i]/400]++;
+	int idx = 0;
+	while(idx < N){
+		if(S.substr(idx, 5) == "maerd") idx += 5;
+		else if(S.substr(idx, 7) == "remaerd") idx += 7;
+		else if(S.substr(idx, 5) == "esare") idx += 5;
+		else if(S.substr(idx, 6) == "resare")	idx += 6;
+		else{
+			cout << "NO" << endl;
+			return 0;
+		}
+
 	}
 
-	int ans = 0;
-	int c = 0;
-	for(auto a:mp){
-		int idx = a.first;
-		int cnt = a.second;
-		if(idx < 8) ans++;
-		else c += cnt;
-	}
+	cout << "YES" << endl;
 
-	printf("%d %d\n", max(ans, 1), ans+c);
 
 	return 0;
 

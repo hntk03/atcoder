@@ -15,31 +15,37 @@ using ll = long long;
 #define pv(val) cerr << #val << '=' << (val) << endl
 
 const int INF = 1e9;
+const int MAX = 1e6;
 
+map<int, int> mp;
+
+bool check(int n){
+	string s = to_string(n);
+	REP(i,s.length()){
+			if(mp[s[i]-'0']) return false;
+	}
+
+	return true;
+}
 
 int main(void){
 
-	int n; cin >> n;
+	int N, K; cin >> N >> K;
 
-	vector<int> a(n);
-	REP(i,n) cin >> a[i];
-
-	map<int, int> mp;
-	REP(i,n){
-		if(a[i] >= 3200) mp[8]++;
-		else mp[a[i]/400]++;
+	REP(i,K){
+		int d; cin >> d;
+		mp[d]++;
+	}
+	
+	FOR(i,N,MAX){
+		if(check(i)){
+			cout << i << endl;
+			return 0;
+		}
 	}
 
-	int ans = 0;
-	int c = 0;
-	for(auto a:mp){
-		int idx = a.first;
-		int cnt = a.second;
-		if(idx < 8) ans++;
-		else c += cnt;
-	}
 
-	printf("%d %d\n", max(ans, 1), ans+c);
+
 
 	return 0;
 
