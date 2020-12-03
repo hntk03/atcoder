@@ -22,10 +22,8 @@ int main(void){
 	string S; cin >> S;
 
 	for(ll i=0;i<N;i++){
-		if(X != 0){
 		if(S[i] == 'o') X++;
-		else X--;
-		}
+		else if(S[i] == 'x' and X != 0) X--;
 	}
 
 	cout << X << endl;
