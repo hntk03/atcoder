@@ -18,22 +18,17 @@ const int INF = 1e9;
 
 int main(void){
 
-	ll N; cin >> N;
-	N--;
+	int N; cin >> N;
+	map<string, int> mp;
 
+	REP(i,N){
+		string S; cin >> S;
 
-	vector<int> a;
-	while(N > 0){
-		a.push_back(N%5);
-		N /= 5;
+		int cnt = mp[S];
+
+		if(cnt == 0) cout << S << endl;
+		else cout << S << "(" << mp[S] << ")" << endl;
+		mp[S]++;
 	}
-
-	if(a.empty()) a.push_back(0);
-	reverse(a.begin(), a.end());
-
-	for(int x : a) cout << x * 2;
-	cout << endl;
-
 	return 0;
-
 }

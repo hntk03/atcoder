@@ -18,21 +18,27 @@ const int INF = 1e9;
 
 int main(void){
 
-	ll N; cin >> N;
-	N--;
+	int N;
+  ll T;
+	cin >> N >> T;
 
+	vector<ll> A(N);
+	REP(i,N) cin >> A[i];
 
-	vector<int> a;
-	while(N > 0){
-		a.push_back(N%5);
-		N /= 5;
+	ll sum = 0;
+	REP(i,N) sum += A[i];
+
+	ll x = T % sum;
+
+	REP(i,N){
+		x -= A[i];
+		if(x <= 0){
+			int idx = i+1;
+			ll s = x += A[i];
+			cout << idx << " " << s <<endl;
+			break;
+		}
 	}
-
-	if(a.empty()) a.push_back(0);
-	reverse(a.begin(), a.end());
-
-	for(int x : a) cout << x * 2;
-	cout << endl;
 
 	return 0;
 

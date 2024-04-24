@@ -18,22 +18,17 @@ const int INF = 1e9;
 
 int main(void){
 
-	ll N; cin >> N;
-	N--;
+	string S, T; cin >> S >> T;	
 
-
-	vector<int> a;
-	while(N > 0){
-		a.push_back(N%5);
-		N /= 5;
+	int ans = S.length()+1;
+	REP(i,S.length()){
+		if(S[i] != T[i]){
+			ans = i+1;
+			break;
+		} 
 	}
 
-	if(a.empty()) a.push_back(0);
-	reverse(a.begin(), a.end());
-
-	for(int x : a) cout << x * 2;
-	cout << endl;
-
+	cout << ans << endl;
 	return 0;
 
 }

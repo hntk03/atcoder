@@ -18,21 +18,17 @@ const int INF = 1e9;
 
 int main(void){
 
-	ll N; cin >> N;
-	N--;
+	string S; cin >> S;	
 
+	int num = stoi(S.substr(3, 3));
 
-	vector<int> a;
-	while(N > 0){
-		a.push_back(N%5);
-		N /= 5;
-	}
+	bool ans = true;
+	if(num == 316) ans = false;
+	else if(num > 349) ans = false;
+	else if(num == 0) ans = false;
 
-	if(a.empty()) a.push_back(0);
-	reverse(a.begin(), a.end());
-
-	for(int x : a) cout << x * 2;
-	cout << endl;
+	if(ans) cout << "Yes" << endl;
+	else cout << "No" << endl;
 
 	return 0;
 

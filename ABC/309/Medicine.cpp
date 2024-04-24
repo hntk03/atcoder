@@ -18,21 +18,30 @@ const int INF = 1e9;
 
 int main(void){
 
-	ll N; cin >> N;
-	N--;
+	ll N, K; cin >> N >> K;
 
-
-	vector<int> a;
-	while(N > 0){
-		a.push_back(N%5);
-		N /= 5;
+	vector<pair<ll, ll> > M(N);
+	ll sum = 0;
+	REP(i,N){
+		ll a, b; cin >> a >> b;
+		M[i] = make_pair(a, b);
+		sum += b;
 	}
 
-	if(a.empty()) a.push_back(0);
-	reverse(a.begin(), a.end());
 
-	for(int x : a) cout << x * 2;
-	cout << endl;
+	if(sum <= K){
+		cout << 1 << endl;
+		return 0;
+	}
+
+	sort(M.begin(), M.end());
+	for(auto [a, b] : M){
+		sum -= b;
+		if(sum <= K){
+			cout << a + 1 << endl;
+			return 0;
+		}
+	}
 
 	return 0;
 

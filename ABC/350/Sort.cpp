@@ -18,21 +18,27 @@ const int INF = 1e9;
 
 int main(void){
 
-	ll N; cin >> N;
-	N--;
-
-
-	vector<int> a;
-	while(N > 0){
-		a.push_back(N%5);
-		N /= 5;
+	int N; cin >> N;	
+	vector<int> A(N);
+	REP(i,N){
+		int x; cin >> x;
+		x--;
+		A[x] = i;
 	}
 
-	if(a.empty()) a.push_back(0);
-	reverse(a.begin(), a.end());
+	vector<pair<int, int> > ans;
+	REP(i,N){
+		if(A[i] == i) continue;
+		int a = A[i];
+		int b = A[a];
+		ans.push_back(make_pair(min(a+1, b+1), max(a+1, b+1)));
+		swap(A[i], A[a]);
+	}
 
-	for(int x : a) cout << x * 2;
-	cout << endl;
+	cout << ans.size() << endl;
+	for(auto x : ans){
+		cout << x.first << " " << x.second << endl;
+	}
 
 	return 0;
 
