@@ -19,29 +19,23 @@ const int INF = 1e9;
 int main(void){
 
 	int N; cin >> N;
-	vector<int> A(N);
-	map<int, int> mp;
-	REP(i,N){
-		cin >> A[i];
-		mp[A[i]] = i;
-	} 
+	vector<pair<ll, ll> > v;
 
-	vector<pair<int, int> > ans;
-
+	ll sum = 0;
 	REP(i,N){
-		int num = i + 1;
-		while(A[i] != num){
-			int idx = mp[num];
-			swap(A[i], A[idx]);
-			mp[A[idx]] = idx;
-			ans.push_back(make_pair(i+1, idx+1));
-		}
+		ll A, B; cin >> A >> B;
+		v.push_back(make_pair(A, B));
+		sum += A;
 	}
 
-	cout << ans.size() << endl;
-	REP(i,ans.size()){
-		cout << ans[i].first << " " << ans[i].second << endl;
+	ll ans = 0;
+	REP(i,N){
+		sum -= v[i].first;
+		ans = max(ans, sum + v[i].second);
+		sum += v[i].first;
 	}
+
+	cout << ans << endl;
 
 	return 0;
 
