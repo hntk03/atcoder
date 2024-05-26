@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+using ll = long long;
+
+//container util
+#define SORT(c) sort((c).begin(),(c).end())
+#define all(a) (a).begin(), (a).end()
+
+//repetition
+#define FOR(i,a,b) for(int i=(a);i<(b);++i)
+#define REP(i,n)  FOR(i,0,n)
+
+//print
+#define pv(val) cerr << #val << '=' << (val) << endl
+
+const int INF = 1e9;
+
+int main(void){
+
+	int Q; cin >> Q;	
+	map<ll, ll> mp;
+
+	REP(i,Q){
+		int q; cin >> q;
+		if(q == 1){
+			int x; cin >> x;
+			mp[x]++;
+		}else if(q == 2){
+			ll x, c; cin >> x >> c;
+			mp[x] -= min(c, mp[x]);
+			if(mp[x] == 0){
+				mp.erase(x);
+			}
+		}else{
+			ll minv = mp.begin()->first;
+			ll maxv = mp.rbegin()->first;
+			cout << maxv - minv << endl;
+		}
+
+	}
+
+	return 0;
+
+}
