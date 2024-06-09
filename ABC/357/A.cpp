@@ -16,28 +16,24 @@ using ll = long long;
 
 const int INF = 1e9;
 
-ll c2(ll n){
-	return n*(n-1)/2;
-}
-
 int main(void){
 
-	string S; cin >> S;	
+	int N, M; cin >> N >> M;		
 
-	int N = S.size();
 
-	ll same = 0;
-	map<char, int> cnt;
-	for(char c : S) cnt[c]++;
-	for(auto p : cnt){
-		int m = p.second;
-		same += c2(m);
+	vector<int> H(N);
+	REP(i,N) cin >> H[i];
+
+	int sum = 0;
+	int ans = 0;
+	REP(i,N){
+		if(M-H[i] >= 0){
+			ans++;
+			M -= H[i];
+		}else{
+			break;
+		}
 	}
-
-	ll diff = c2(N) - same;
-
-	ll ans = diff;
-	if(same) ans++;
 
 	cout << ans << endl;
 

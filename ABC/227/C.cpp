@@ -16,31 +16,20 @@ using ll = long long;
 
 const int INF = 1e9;
 
-ll c2(ll n){
-	return n*(n-1)/2;
-}
-
 int main(void){
 
-	string S; cin >> S;	
 
-	int N = S.size();
+	ll N; cin >> N;
 
-	ll same = 0;
-	map<char, int> cnt;
-	for(char c : S) cnt[c]++;
-	for(auto p : cnt){
-		int m = p.second;
-		same += c2(m);
+	ll ans = 0;
+	for(ll A=1;(A*A*A)<=N;A++){
+		for(ll B=A;(A*B*B)<=N;B++){
+			ll maxC = N / (A*B);
+			ans += maxC-B+1;
+		}
 	}
 
-	ll diff = c2(N) - same;
-
-	ll ans = diff;
-	if(same) ans++;
-
 	cout << ans << endl;
-
 	return 0;
 
 }

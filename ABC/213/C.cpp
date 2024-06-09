@@ -16,30 +16,34 @@ using ll = long long;
 
 const int INF = 1e9;
 
-ll c2(ll n){
-	return n*(n-1)/2;
-}
-
 int main(void){
 
-	string S; cin >> S;	
+	ll H, W, N; cin >> H >> W >> N;
 
-	int N = S.size();
+	vector<ll> A(N), B(N);
 
-	ll same = 0;
-	map<char, int> cnt;
-	for(char c : S) cnt[c]++;
-	for(auto p : cnt){
-		int m = p.second;
-		same += c2(m);
+	map<ll, ll> row, col;
+	for(ll i = 0;i<N;i++){
+		cin >> A[i] >> B[i];
+		row[A[i]] = -1LL;
+		col[B[i]] = -1LL;
 	}
 
-	ll diff = c2(N) - same;
+	ll idx = 1;
+	for(auto x : row){
+		row[x.first] = idx++;
+	}
 
-	ll ans = diff;
-	if(same) ans++;
+	idx = 1;
+	for(auto x : col){
+		col[x.first] = idx++;
+	}
 
-	cout << ans << endl;
+	for(ll i = 0;i<N;i++){
+		cout << row[A[i]] << " " << col[B[i]] << endl;
+	}
+
+
 
 	return 0;
 

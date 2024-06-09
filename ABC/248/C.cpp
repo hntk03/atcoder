@@ -16,28 +16,33 @@ using ll = long long;
 
 const int INF = 1e9;
 
-ll c2(ll n){
-	return n*(n-1)/2;
-}
+const int mod = 998244353;
 
 int main(void){
 
-	string S; cin >> S;	
+	int N, M, K; cin >> N >> M >> K;
+	vector<vector<int> > dp(N+1, vector<int>(K+1, 0));
 
-	int N = S.size();
+	dp[0][0] = 1;
 
-	ll same = 0;
-	map<char, int> cnt;
-	for(char c : S) cnt[c]++;
-	for(auto p : cnt){
-		int m = p.second;
-		same += c2(m);
+	FOR(x,1,N+1){
+		REP(y,K+1){
+			int now = 0;
+			FOR(i,1,M+1){
+				if(y-i >= 0){
+					now += dp[x-1][y-i];
+					now %= mod;
+				}
+			}
+			dp[x][y] = now;
+		}
 	}
 
-	ll diff = c2(N) - same;
-
-	ll ans = diff;
-	if(same) ans++;
+	int ans = 0;
+	REP(y,K+1){
+		ans += dp[N][y];
+		ans %= mod;
+	}
 
 	cout << ans << endl;
 

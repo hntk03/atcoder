@@ -15,27 +15,43 @@ using ll = long long;
 #define pv(val) cerr << #val << '=' << (val) << endl
 
 const int INF = 1e9;
+vector<vector<ll> > A;
+vector<bool> visited;
+
+void dfs(int v){
+	if(visited[v]) return;
+	visited[v] = true;
+	for(int to : A[v]){
+		dfs(to);
+	}
+}
 
 int main(void){
 
-	const int M = 1e8;
+	int N; cin >> N;	
+	vector<int> T(N), K(N);
+	A.resize(N);
+	visited.resize(N);
 
-	int N; cin >> N;
-	vector<int> A(N);
-	REP(i,N) cin >> A[i];
-	sort(A.begin(), A.end());
+	REP(i,N){
+		cin >> T[i] >> K[i];
+		REP(j,K[i]){
+			ll a; cin >> a;
+			a--;
+			A[i].push_back(a);
+		}
+	}
+
+	dfs(N-1);
 
 	ll ans = 0;
-	REP(i,N) ans += A[i]*ll(N-1);
-
-	int r = N-1;
 	REP(i,N){
-		while(r >= 0 and A[i]+A[r] >= M) r--;
-		// max(r, i+1) < j < N
-	  ans -= ll(N - max(r, i) - 1)*M;
+		if(!visited[i]) continue;
+		ans += T[i];
 	}
 
 	cout << ans << endl;
+
 
 	return 0;
 

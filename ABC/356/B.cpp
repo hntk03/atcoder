@@ -16,30 +16,26 @@ using ll = long long;
 
 const int INF = 1e9;
 
-ll c2(ll n){
-	return n*(n-1)/2;
-}
-
 int main(void){
 
-	string S; cin >> S;	
+	int N, M; cin >> N >> M;	
 
-	int N = S.size();
+	vector<ll> A(M), fact(M);
 
-	ll same = 0;
-	map<char, int> cnt;
-	for(char c : S) cnt[c]++;
-	for(auto p : cnt){
-		int m = p.second;
-		same += c2(m);
+	REP(i,M) cin >> A[i];
+
+	REP(i,N){
+		REP(j,M){
+			ll X; cin >> X;
+			fact[j] += X;
+		}
 	}
 
-	ll diff = c2(N) - same;
+	bool ans = true;
+	REP(i,M) if(fact[i] < A[i]) ans = false;
 
-	ll ans = diff;
-	if(same) ans++;
-
-	cout << ans << endl;
+	if(ans) cout << "Yes" << endl;
+	else cout << "No" << endl;
 
 	return 0;
 
