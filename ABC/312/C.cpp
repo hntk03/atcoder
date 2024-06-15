@@ -18,32 +18,29 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N; cin >> N;
-	vector<ll> A(N);
+	int N, M; cin >> N >> M;
+	
+	vector<int> A(N), B(M);
 	REP(i,N) cin >> A[i];
+	REP(i,M) cin >> B[i];
 
-	ll sum = 0;
-	REP(i,N) sum += A[i];
+	vector<pair<int, int> > events;
+	REP(i,N) events.push_back(make_pair(A[i],0));
+	REP(i,M) events.push_back(make_pair(B[i]+1,1));
 
-	sort(A.begin(), A.end());
+	sort(events.begin(), events.end());
 
-	vector<int> B(N, sum/N);
+	int NA = 0, NB = M;
 
-	ll amari = sum % N;
-	REP(i,N){
+	for(auto [p, type] : events){
+		if(type == 0) NA++;
+		else NB--;
 
-		if(amari){
-			B[N-i-1]++;
-			amari--;
-		} 
-		if(amari == 0) break;
+		if(NA >= NB){
+			cout << p << endl;
+			return 0;
+		}
 	}
-
-	ll ans = 0;
-	REP(i,N) ans += abs(A[i] - B[i]);
-	ans /= 2;
-
-	cout << ans << endl;
 
 	return 0;
 

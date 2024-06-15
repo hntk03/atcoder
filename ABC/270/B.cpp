@@ -18,27 +18,20 @@ const int INF = 1e9;
 
 int main(void){
 
-	ll N, D, P; cin >> N >> D >> P;
-	vector<ll> F(N);
+	int X, Y, Z; cin >> X >> Y >> Z;
 
-	ll sum = 0;
-	REP(i,N){
-		cin >> F[i];
-		sum += F[i];
-	}
+	bool canHammer = !((0 < Y and Y < Z) or (Z < Y and Y < 0));
+	bool existWall = (0 < Y and Y < X) or (X < Y and Y < 0);
 
-	sort(F.begin(), F.end());
-
-	ll ans = sum;
-	ll cnt = (N+D-1) / D;
-	REP(i,cnt){
-		REP(j,D){
-			if(F.size() == 0) continue;
-			sum -= F.back();
-			F.pop_back();
+	int ans = 0;
+	if(existWall){
+		if(canHammer){
+			ans += abs(Z) + abs(X - Z);
+		}else{
+			ans = -1;
 		}
-		sum += P;
-		ans = min(ans, sum);
+	}else{
+		ans = abs(X);
 	}
 
 	cout << ans << endl;

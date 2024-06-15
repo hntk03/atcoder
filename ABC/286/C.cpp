@@ -16,29 +16,29 @@ using ll = long long;
 
 const int INF = 1e9;
 
-int main(void){
-
-	ll N, D, P; cin >> N >> D >> P;
-	vector<ll> F(N);
-
-	ll sum = 0;
-	REP(i,N){
-		cin >> F[i];
-		sum += F[i];
+int make(string s){
+	int diff = 0;
+	REP(i,s.length()/2){
+		diff += s[i] != s[s.length() - 1 - i];
 	}
 
-	sort(F.begin(), F.end());
+	return diff;
+}
 
-	ll ans = sum;
-	ll cnt = (N+D-1) / D;
-	REP(i,cnt){
-		REP(j,D){
-			if(F.size() == 0) continue;
-			sum -= F.back();
-			F.pop_back();
-		}
-		sum += P;
-		ans = min(ans, sum);
+int main(void){
+
+	ll N, A, B; cin >> N >> A >> B;	
+	string S; cin >> S;
+
+	string T = S + S + S;
+	int idx = (N+1)/2;
+	ll ans = 1e18;
+	REP(i,N){
+		string X = T.substr(idx+i, N);
+		ll costA = A*((idx+i)%N);
+		ll costB = B*make(X);
+
+		ans = min(ans, costA+costB);
 	}
 
 	cout << ans << endl;

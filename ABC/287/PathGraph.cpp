@@ -45,14 +45,25 @@ int main(void){
 
 	UnionFind uf(N);
 
+	vector<vector<int> > g(N);
+
 	REP(i,M){
 		int u, v; cin >> u >> v;
 		u--; v--;
+		g[u].push_back(v);
+		g[v].push_back(u);
 
 		uf.unite(u, v);
 	}
-	
-	if(uf.size(0) == N) cout << "Yes" << endl;
+
+	map<int, int> mp;
+	REP(i,N){
+		mp[g[i].size()]++;
+	}
+
+	bool x = (mp[1] == 2) and (mp[2] == (N - 2));
+
+	if(uf.size(0) == N and x) cout << "Yes" << endl;
 	else cout << "No" << endl;
 
 	return 0;

@@ -18,30 +18,11 @@ const int INF = 1e9;
 
 int main(void){
 
-	ll N, D, P; cin >> N >> D >> P;
-	vector<ll> F(N);
+	string S; cin >> S;
 
-	ll sum = 0;
-	REP(i,N){
-		cin >> F[i];
-		sum += F[i];
-	}
+	int idx = S.rfind('.');
 
-	sort(F.begin(), F.end());
-
-	ll ans = sum;
-	ll cnt = (N+D-1) / D;
-	REP(i,cnt){
-		REP(j,D){
-			if(F.size() == 0) continue;
-			sum -= F.back();
-			F.pop_back();
-		}
-		sum += P;
-		ans = min(ans, sum);
-	}
-
-	cout << ans << endl;
+	cout << S.substr(idx+1) << endl;
 
 	return 0;
 

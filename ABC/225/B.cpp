@@ -19,23 +19,21 @@ const int INF = 1e9;
 int main(void){
 
 	int N; cin >> N;
-	vector<vector<bool> > graph(N, vector<bool>(N, false));
+	vector<vector<int> > g(N);
 
 	REP(i,N-1){
 		int a, b; cin >> a >> b;
 		a--; b--;
-		graph[a][b] = true;
-		graph[b][a] = true;
+
+		g[a].push_back(b);
+		g[b].push_back(a);
+
 	}
 
-	bool ans = false;
-	REP(i,N){
-		int cnt = 0;
-		REP(j,N){
-			if(graph[i][j]) cnt++;
-		}
-		if(cnt == N-1) ans = true;
-	}
+	map<int, int> mp;
+	REP(i,N) mp[g[i].size()]++;
+
+	bool ans = (mp[1] == (N-1)) and (mp[N-1] == 1);
 
 	if(ans) cout << "Yes" << endl;
 	else cout << "No" << endl;

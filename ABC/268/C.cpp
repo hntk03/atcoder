@@ -18,28 +18,19 @@ const int INF = 1e9;
 
 int main(void){
 
-	ll N, D, P; cin >> N >> D >> P;
-	vector<ll> F(N);
+	int N; cin >> N;
 
-	ll sum = 0;
+	vector<int> P(N);
+	REP(i,N) cin >> P[i];
+
+	vector<int> cnt(N);
 	REP(i,N){
-		cin >> F[i];
-		sum += F[i];
+		int j = (P[i] - i - 1 + N)%N;
+		REP(k,3) cnt[(j+k)%N]++;
 	}
 
-	sort(F.begin(), F.end());
-
-	ll ans = sum;
-	ll cnt = (N+D-1) / D;
-	REP(i,cnt){
-		REP(j,D){
-			if(F.size() == 0) continue;
-			sum -= F.back();
-			F.pop_back();
-		}
-		sum += P;
-		ans = min(ans, sum);
-	}
+	int ans = 0;
+	REP(i,N) ans = max(ans, cnt[i]);
 
 	cout << ans << endl;
 
