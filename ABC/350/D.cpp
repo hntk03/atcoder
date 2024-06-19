@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <atcoder/all>
 
 using namespace std;
 using ll = long long;
@@ -14,40 +15,31 @@ using ll = long long;
 //print
 #define pv(val) cerr << #val << '=' << (val) << endl
 
+using namespace atcoder;
+
 const int INF = 1e9;
 
+
 int main(void){
-	
-	int N; cin >> N;
-	vector<string> S(N);
-	REP(i,N) cin >> S[i];
 
-	vector<int> r(N), c(N);
+	int N, M; cin >> N >> M;
 
-	REP(i,N){
-		int cnt = 0;
-		REP(j,N){
-			if(S[i][j] == 'o')  cnt++;
-		}
-		r[i] = cnt;
-	}
+	dsu uf(N);
 
-	REP(i,N){
-		int cnt = 0;
-		REP(j,N){
-			if(S[j][i] == 'o')  cnt++;
-		}
-		c[i] = cnt;
+	REP(i,M){
+		int A, B; cin >> A >> B;
+		A--; B--;
+
+		uf.merge(A, B);
 	}
 
 	ll ans = 0;
-	REP(i,N){
-		REP(j,N){
-			if(S[i][j] == 'o'){
-				ans += (r[i] - 1) * (c[j] - 1);
-			}
-		}
+	REP(i,N) if(uf.leader(i) == i){
+		int s = uf.size(i);
+		ans += s*ll(s-1)/2;
 	}
+
+	ans -= M;
 
 	cout << ans << endl;
 

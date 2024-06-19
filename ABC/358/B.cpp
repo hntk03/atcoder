@@ -17,39 +17,28 @@ using ll = long long;
 const int INF = 1e9;
 
 int main(void){
-	
-	int N; cin >> N;
-	vector<string> S(N);
-	REP(i,N) cin >> S[i];
 
-	vector<int> r(N), c(N);
+	int N, A; cin >> N >> A;
+	vector<int> T(N);
+	REP(i,N) cin >> T[i];
 
+	int prev = 0;
 	REP(i,N){
-		int cnt = 0;
-		REP(j,N){
-			if(S[i][j] == 'o')  cnt++;
+
+		int now = 0;
+
+		if(T[i] < prev){
+			now = prev + A;
+		}else{
+			now = T[i] + A;
 		}
-		r[i] = cnt;
+
+		cout << now << endl;
+
+		prev = now;
+
 	}
 
-	REP(i,N){
-		int cnt = 0;
-		REP(j,N){
-			if(S[j][i] == 'o')  cnt++;
-		}
-		c[i] = cnt;
-	}
-
-	ll ans = 0;
-	REP(i,N){
-		REP(j,N){
-			if(S[i][j] == 'o'){
-				ans += (r[i] - 1) * (c[j] - 1);
-			}
-		}
-	}
-
-	cout << ans << endl;
 
 	return 0;
 

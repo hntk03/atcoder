@@ -17,39 +17,28 @@ using ll = long long;
 const int INF = 1e9;
 
 int main(void){
-	
-	int N; cin >> N;
-	vector<string> S(N);
-	REP(i,N) cin >> S[i];
 
-	vector<int> r(N), c(N);
+	int N, K; cin >> N >> K;
+	vector<int> P(N);
+	REP(i,N) cin >> P[i];
+	REP(i,N) P[i]--;
 
+	vector<int> Q(N+1);
+	REP(i,N) Q[P[i]] = i;
+
+	int ans = N;
+	set<int> st;
 	REP(i,N){
-		int cnt = 0;
-		REP(j,N){
-			if(S[i][j] == 'o')  cnt++;
-		}
-		r[i] = cnt;
-	}
-
-	REP(i,N){
-		int cnt = 0;
-		REP(j,N){
-			if(S[j][i] == 'o')  cnt++;
-		}
-		c[i] = cnt;
-	}
-
-	ll ans = 0;
-	REP(i,N){
-		REP(j,N){
-			if(S[i][j] == 'o'){
-				ans += (r[i] - 1) * (c[j] - 1);
-			}
+		st.insert(Q[i]);
+		if(st.size() > K) st.erase(Q[i-K]);
+		if(st.size() == K){
+			int now = *st.rbegin() - *st.begin();
+			ans = min(ans, now);
 		}
 	}
 
 	cout << ans << endl;
+
 
 	return 0;
 

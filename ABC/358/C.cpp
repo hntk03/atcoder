@@ -17,36 +17,27 @@ using ll = long long;
 const int INF = 1e9;
 
 int main(void){
-	
-	int N; cin >> N;
+
+	int N, M; cin >> N >> M;	
 	vector<string> S(N);
 	REP(i,N) cin >> S[i];
 
-	vector<int> r(N), c(N);
-
-	REP(i,N){
-		int cnt = 0;
+	int ans = N;
+	REP(i,1<<N){
+		vector<bool> taste(M);
 		REP(j,N){
-			if(S[i][j] == 'o')  cnt++;
-		}
-		r[i] = cnt;
-	}
-
-	REP(i,N){
-		int cnt = 0;
-		REP(j,N){
-			if(S[j][i] == 'o')  cnt++;
-		}
-		c[i] = cnt;
-	}
-
-	ll ans = 0;
-	REP(i,N){
-		REP(j,N){
-			if(S[i][j] == 'o'){
-				ans += (r[i] - 1) * (c[j] - 1);
+			if((i>>j)&1){
+				REP(k,M){
+					if(S[j][k] == 'o') taste[k] = true;
+				}
 			}
 		}
+
+		bool ok = true;
+		REP(j,M) if(!taste[j]) ok = false;
+
+		if(ok) ans = min(ans, __builtin_popcount(i));
+
 	}
 
 	cout << ans << endl;
