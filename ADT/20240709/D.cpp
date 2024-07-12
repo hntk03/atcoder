@@ -18,34 +18,18 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N; cin >> N;
-	deque<int> a(N);
-	REP(i,N) cin >> a[i];
+	string S; cin >> S;	
 
-	sort(a.begin(), a.end());
-	unique(a.begin(), a.end());
+	bool upper = false, lower = false;
+	for(char c : S) if(isupper(c)) upper = true;
+	for(char c : S) if(islower(c)) lower = true;
 
-	int kan = 1;
-	int ans = 0;
-	while(!a.empty()){
-		if(a.front() == kan){
-			kan++;
-			ans++;
-			a.pop_front();
-		}else{
-			if(a.size() > 1){
-				a.pop_back();
-				a.pop_back();
-				kan++;
-				ans++;
-			}else{
-				break;
-			}
-		}
-	}
+	int N = S.length();
+	sort(S.begin(), S.end());
+	S.erase(unique(S.begin(), S.end()), S.end());
 
-	cout << ans << endl;
-
+	if(lower and upper and N == S.length()) cout << "Yes" << endl;
+	else cout << "No" << endl;
 
 	return 0;
 

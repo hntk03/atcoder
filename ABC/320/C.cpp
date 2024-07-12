@@ -18,34 +18,28 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N; cin >> N;
-	deque<int> a(N);
-	REP(i,N) cin >> a[i];
+	int M; cin >> M;	
+	vector<string> S(3);
+	REP(i,3) cin >> S[i];
 
-	sort(a.begin(), a.end());
-	unique(a.begin(), a.end());
+	int ans = INF;
+	REP(t0,300){
+		REP(t1,300){
+			REP(t2,300){
+				if(t0 == t1) continue;
+				if(t0 == t2) continue;
+				if(t1 == t2) continue;
 
-	int kan = 1;
-	int ans = 0;
-	while(!a.empty()){
-		if(a.front() == kan){
-			kan++;
-			ans++;
-			a.pop_front();
-		}else{
-			if(a.size() > 1){
-				a.pop_back();
-				a.pop_back();
-				kan++;
-				ans++;
-			}else{
-				break;
+				if(S[0][t0%M] != S[1][t1%M]) continue;
+				if(S[0][t0%M] != S[2][t2%M]) continue;
+
+				ans = min(ans, max(max(t0, t1), t2));
 			}
 		}
 	}
 
+	if(ans == INF) ans = -1;
 	cout << ans << endl;
-
 
 	return 0;
 

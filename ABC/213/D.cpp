@@ -16,36 +16,35 @@ using ll = long long;
 
 const int INF = 1e9;
 
+vector<set<int>> g;
+vector<bool> visited;
+
+void dfs(int v){
+	visited[v] = true;
+	cout << v+1 << " ";
+
+	for(int to : g[v]){
+		if(visited[to]) continue;
+		dfs(to);
+		cout << v + 1 << " ";
+	}
+}
+
 int main(void){
 
-	int N; cin >> N;
-	deque<int> a(N);
-	REP(i,N) cin >> a[i];
+	int N; cin >> N;	
+	g.resize(N);
+	visited.assign(N, false);
 
-	sort(a.begin(), a.end());
-	unique(a.begin(), a.end());
-
-	int kan = 1;
-	int ans = 0;
-	while(!a.empty()){
-		if(a.front() == kan){
-			kan++;
-			ans++;
-			a.pop_front();
-		}else{
-			if(a.size() > 1){
-				a.pop_back();
-				a.pop_back();
-				kan++;
-				ans++;
-			}else{
-				break;
-			}
-		}
+	REP(i,N-1){
+		int A, B; cin >> A >> B;
+		A--; B--;
+		g[A].insert(B);
+		g[B].insert(A);
 	}
 
-	cout << ans << endl;
-
+	dfs(0);
+	cout << endl;
 
 	return 0;
 

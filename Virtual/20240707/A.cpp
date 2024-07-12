@@ -18,34 +18,12 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N; cin >> N;
-	deque<int> a(N);
-	REP(i,N) cin >> a[i];
+	int K; cin >> K;	
 
-	sort(a.begin(), a.end());
-	unique(a.begin(), a.end());
+	int h = 21 + K/60;
+	int m = K%60;
 
-	int kan = 1;
-	int ans = 0;
-	while(!a.empty()){
-		if(a.front() == kan){
-			kan++;
-			ans++;
-			a.pop_front();
-		}else{
-			if(a.size() > 1){
-				a.pop_back();
-				a.pop_back();
-				kan++;
-				ans++;
-			}else{
-				break;
-			}
-		}
-	}
-
-	cout << ans << endl;
-
+	printf("%02d:%02d\n", h, m);
 
 	return 0;
 

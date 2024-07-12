@@ -19,33 +19,27 @@ const int INF = 1e9;
 int main(void){
 
 	int N; cin >> N;
-	deque<int> a(N);
-	REP(i,N) cin >> a[i];
+	vector<int> x(N), y(N);
+	REP(i,N) cin >> x[i] >> y[i];
 
-	sort(a.begin(), a.end());
-	unique(a.begin(), a.end());
+	set<pair<int, int>> st;
+	REP(i,N) st.insert(make_pair(x[i], y[i]));
 
-	int kan = 1;
 	int ans = 0;
-	while(!a.empty()){
-		if(a.front() == kan){
-			kan++;
-			ans++;
-			a.pop_front();
-		}else{
-			if(a.size() > 1){
-				a.pop_back();
-				a.pop_back();
-				kan++;
+	REP(i,N){
+		REP(j,N){
+			if(i == j) continue;
+			int xi = x[i], xj = x[j];
+			int yi = y[i], yj = y[j];
+			if(xi < xj and yi < yj){
+				if(st.find(make_pair(xi,yj)) == st.end()) continue;
+				if(st.find(make_pair(xj,yi)) == st.end()) continue;
 				ans++;
-			}else{
-				break;
 			}
 		}
 	}
 
 	cout << ans << endl;
-
 
 	return 0;
 

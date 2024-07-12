@@ -16,57 +16,29 @@ using ll = long long;
 
 const int INF = 1e9;
 
-struct BIT {
-  private:
-   vector<int> bit;
-   int N;
-
-  public:
-   BIT(int size) {
-     N = size;
-     bit.resize(N + 1);
-   }
-
-   // 一点更新です
-   void add(int a, int w) {
-     for (int x = a; x <= N; x += x & -x) bit[x] += w;
-   }
-
-   // 1~Nまでの和を求める。
-   int sum(int a) {
-     int ret = 0;
-     for (int x = a; x > 0; x -= x & -x) ret += bit[x];
-     return ret;
-   }
- };
-
 int main(void){
 
-	int N;
+	int N; 
 	ll T; cin >> N >> T;
 	string S; cin >> S;
-	vector<ll> X(N);
-	REP(i,N) cin >> X[i];
-
-	sort(X.begin(), X.end());
-
-	vector<pair<ll, int>> moved(N);
+	vector<ll> neg, pos;
 	REP(i,N){
-		if(S[i] == '1') moved[i] = make_pair(X[i]+T, -i);
-		else moved[i] = make_pair(X[i]-T, -i);
+		int X; cin >> X;
+		if(S[i] == '0') neg.push_back(X);
+		else pos.push_back(X);
 	}
 
-	sort(moved.begin(), moved.end());
+	sort(neg.begin(), neg.end());
+	sort(pos.begin(), pos.end());
 
-	REP(i,N) moved[i].second *= -1;
+	auto left_count = [&](ll r){
+		return lower_bound(pos.begin(), pos.end(), r) - pos.begin();
+	};
 
-	BIT b(N);
 	ll ans = 0;
-	REP(i,N){
-		int idx = moved[i].second;
-		idx++;
-		ans += i - b.sum(idx);
-		b.add(idx, 1);
+	for(ll x : neg){
+		ll l = x - T*2, r = x;
+		ans += left_count(r) - left_count(l);
 	}
 
 	cout << ans << endl;

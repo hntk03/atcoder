@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
+#include <atcoder/all>
 
 using namespace std;
 using ll = long long;
+using mint = atcoder::modint998244353;
 
 //container util
 #define SORT(c) sort((c).begin(),(c).end())
@@ -18,34 +20,21 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N; cin >> N;
-	deque<int> a(N);
-	REP(i,N) cin >> a[i];
+	ll N; cin >> N;	
+	mint a = 1;
 
-	sort(a.begin(), a.end());
-	unique(a.begin(), a.end());
-
-	int kan = 1;
-	int ans = 0;
-	while(!a.empty()){
-		if(a.front() == kan){
-			kan++;
-			ans++;
-			a.pop_front();
-		}else{
-			if(a.size() > 1){
-				a.pop_back();
-				a.pop_back();
-				kan++;
-				ans++;
-			}else{
-				break;
-			}
+	{
+		ll _N = N;
+		while(_N){
+			a *= 10;
+			_N /= 10;
 		}
 	}
 
-	cout << ans << endl;
+	mint s = (a.pow(N) - 1) / (a - 1);
+	s *= N;
 
+	cout << s.val() << endl;
 
 	return 0;
 

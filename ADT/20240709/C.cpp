@@ -16,36 +16,18 @@ using ll = long long;
 
 const int INF = 1e9;
 
+double radian(int degree){
+	return degree * M_PI / 180.0;
+}
+
 int main(void){
 
-	int N; cin >> N;
-	deque<int> a(N);
-	REP(i,N) cin >> a[i];
+	int a, b, d; cin >> a >> b >> d;
 
-	sort(a.begin(), a.end());
-	unique(a.begin(), a.end());
+	double newX = a * cos(radian(d)) - b * sin(radian(d));
+	double newY = a * sin(radian(d)) + b  * cos(radian(d));
 
-	int kan = 1;
-	int ans = 0;
-	while(!a.empty()){
-		if(a.front() == kan){
-			kan++;
-			ans++;
-			a.pop_front();
-		}else{
-			if(a.size() > 1){
-				a.pop_back();
-				a.pop_back();
-				kan++;
-				ans++;
-			}else{
-				break;
-			}
-		}
-	}
-
-	cout << ans << endl;
-
+	printf("%.10f %.10f\n", newX, newY);
 
 	return 0;
 

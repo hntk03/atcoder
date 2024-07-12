@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
+#include <atcoder/all>
 
 using namespace std;
 using ll = long long;
+using mint = atcoder::modint998244353;
 
 //container util
 #define SORT(c) sort((c).begin(),(c).end())
@@ -19,33 +21,23 @@ const int INF = 1e9;
 int main(void){
 
 	int N; cin >> N;
-	deque<int> a(N);
-	REP(i,N) cin >> a[i];
+	vector<int> A(N);
+	REP(i,N) cin >> A[i];
+	
+	vector<mint> dp(10);
+	dp[A[0]] = 1;
 
-	sort(a.begin(), a.end());
-	unique(a.begin(), a.end());
-
-	int kan = 1;
-	int ans = 0;
-	while(!a.empty()){
-		if(a.front() == kan){
-			kan++;
-			ans++;
-			a.pop_front();
-		}else{
-			if(a.size() > 1){
-				a.pop_back();
-				a.pop_back();
-				kan++;
-				ans++;
-			}else{
-				break;
-			}
+	FOR(i,1,N){
+		int na = A[i];
+		vector<mint> p(10);
+		swap(p, dp);
+		REP(j,10){
+			dp[(j+na)%10] += p[j];
+			dp[(j*na)%10] += p[j];
 		}
 	}
 
-	cout << ans << endl;
-
+	REP(i,10) cout << dp[i].val() << endl;
 
 	return 0;
 

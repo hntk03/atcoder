@@ -18,34 +18,31 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N; cin >> N;
-	deque<int> a(N);
-	REP(i,N) cin >> a[i];
+	int Q; cin >> Q;	
+	vector<ll> ans;
+	priority_queue<ll, vector<ll>, greater<ll>> que;
 
-	sort(a.begin(), a.end());
-	unique(a.begin(), a.end());
-
-	int kan = 1;
-	int ans = 0;
-	while(!a.empty()){
-		if(a.front() == kan){
-			kan++;
-			ans++;
-			a.pop_front();
-		}else{
-			if(a.size() > 1){
-				a.pop_back();
-				a.pop_back();
-				kan++;
-				ans++;
+	ll bias = 0;
+	REP(qi,Q){
+		int type; cin >> type;
+		if(type == 3){
+			ll num = que.top();
+			que.pop();
+			ans.push_back(bias + num);
+		}
+		else{
+			ll X; cin >> X;
+			if(type == 1){
+				que.push(X-bias);
 			}else{
-				break;
+				bias += X;
 			}
 		}
 	}
 
-	cout << ans << endl;
-
+	for(ll x : ans){
+		cout << x << endl;
+	}
 
 	return 0;
 
