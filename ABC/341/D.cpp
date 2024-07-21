@@ -16,6 +16,7 @@ using ll = long long;
 
 const int INF = 1e9;
 
+//cでもc++でも
 ll gcd(ll a, ll b){
   if(a%b == 0){
     return b;
@@ -23,38 +24,36 @@ ll gcd(ll a, ll b){
     return gcd(b, a%b);
   }
 }
+
+//cでもc++でも
 ll lcm(ll a, ll b){
   return a*b / gcd(a, b);
 }
 
+ll N, M, K;
+ll lc;
+
+bool f(ll x){
+	ll cnt = x/N + x/M - 2*(x/lc);
+	return cnt >= K;
+}
+
 int main(void){
 
-	ll N, M; cin >> N >> M;
-	ll K; cin >> K;
-
-	ll X = lcm(N, M);
-
-
-	ll cnt = 0;
-	FOR(i,1,X){
-		if(i % N == 0 and i % M != 0) cnt++;
-		else if(i % N != 0 and i % M == 0) cnt++;
-	}
-
-	ll pos = K % (cnt+1);
-
-	ll now = 0;
-	for(ll i=X*(K/cnt-1);;i++){
-
-		if(i % N == 0 and i % M != 0) now++;
-		else if(i % N != 0 and i % M == 0) now++;
-
-		if(now == pos){
-			cout << i << endl;
-			break;
+	cin >> N >> M >> K;
+	lc = lcm(N, M);
+	
+	ll l = 0, r = 1e18;
+	while(abs(r-l)>1){
+		ll c = (l+r)/2;
+		if(!f(c)){
+			l = c;
+		}else if(f(c)){
+			r = c;
 		}
-
 	}
+
+	cout << r << endl;
 
 	return 0;
 
