@@ -16,46 +16,36 @@ using ll = long long;
 
 const int INF = 1e9;
 
-bool isP(int x){
-	string s = to_string(x);
-
-	REP(i,s.length()/2){
-		if(s[i] != s[s.length()-i-1]) return false;
-	}
-
-	return true;
-}
-
-
 int main(void){
 
-	ll N; cin >> N;	
+	ll N; cin >> N;
 
-	vector<ll> p;
-	REP(i,10) p.push_back(i);
-	FOR(i,1,10) p.push_back(i*10+i);
-
-	if(N <= p.size()){
-		cout << p[N-1] << endl;
+	if(N == 1){
+		cout << 0 << endl;
 		return 0;
 	}
-	
-	N -= p.size();
 
-	FOR(i,3,18){
-		if(N )
-		ll now = ;
+	N--;
 
-	}
-
-
-	REP(i,100000000){
-		if(isP(i)){
-			string s = to_string(i);
-			cout << s << " " <<  s.substr(0,(s.length()+2-1)/2) << endl;
+	for(int keta = 1;;keta++){
+		int l = (keta+1)/2;
+		ll num = 9;
+		REP(i,l-1) num *= 10;
+		if(N > num){
+			N -= num;
+			continue;
 		}
-	}
 
+		N += num/9-1;
+		string s = to_string(N);
+		string rs = s;
+		reverse(rs.begin(), rs.end());
+		if(keta%2 == 1) s.pop_back();
+		s += rs;
+		cout << s << endl;
+		return 0;
+
+	}
 
 	return 0;
 
