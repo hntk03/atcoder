@@ -18,17 +18,22 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N; cin >> N;	
+	int N; cin >> N;
 
-	ll now = 0;
+	string prev = "";
+	bool ok = true;
+	bool ans = true;
 	REP(i,N){
-		int A; cin >> A;
-		now += A;
-		now = max(0ll, now);
+		string S; cin >> S;
+		if(!ok){
+			ans = false;
+		}
+		ok = !(S == "sweet" and S == prev);
+		prev = S;
 	}
-
-	cout << now << endl;
-
+	
+	if(ans) cout << "Yes" << endl;
+	else cout << "No" << endl;
 	return 0;
 
 }
