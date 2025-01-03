@@ -18,124 +18,50 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N, M;
-  ll Sx, Sy; cin >> N >> M >> Sx >> Sy;
-	map<ll, pair<int, int>> Xidx, Yidx;
+	int N, M; 
+	ll Sx, Sy; cin >> N >> M >> Sx >> Sy;
 
-	vector<ll> X(N), Y(N);
-	REP(i,N) cin >> X[i] >> Y[i];
-	map<ll, vector<ll>> mpX, mpY;
+	using D = map<ll, set<ll>>;
+	map<ll, set<ll>> xs, ys;
+
 	REP(i,N){
-		mpX[X[i]].push_back(Y[i]);
-		mpY[Y[i]].push_back(X[i]);
+		int x, y; cin >> x >> y;
+		xs[y].insert(x);
+		ys[x].insert(y);
 	}
 
-	REP(i,N) sort(mpX[X[i]].begin(), mpX[X[i]].end());
-	REP(i,N) sort(mpY[Y[i]].begin(), mpY[Y[i]].end());
-	
-	ll nowX = Sx, nowY = Sy;
+	int ans = 0;
+
+	auto f = [&](D& xs, D&ys, ll y, ll l, ll r){
+		if(r < l) swap(l, r);
+		auto &st  = xs[y];
+		while(1){
+			auto it = st.lower_bound(l);
+			if(it == st.end()) break;
+			if(*it > r) break;
+			ys[*it].erase(y);
+			st.erase(it);
+			ans++;
+		}
+
+	};
+
 	REP(i,M){
-		char D;
-		ll C;
-		cin >> D >> C;
-		if(D == 'U'){
-			ll nY = nowY + C;
+		char d; ll c;
+		cin >> d >> c;
 
-			if(!mpX.count(nowX)){
-				nowY = nY;
-				continue;
-			}
+		ll nx = Sx, ny = Sy;
+		if(d == 'U') ny += c;
+		if(d == 'D') ny -= c;
+		if(d == 'R') nx += c;
+		if(d == 'L') nx -= c;
+		if(Sy == ny) f(xs, ys, Sy, Sx, nx);
+		else f(ys, xs, Sx, Sy, ny);
 
-			int startIdx = lower_bound(mpX[nowX].begin(), mpX[nowX].end(), nowY) - mpX[nowX].begin();
-			int endIdx = upper_bound(mpX[nowX].begin(), mpX[nowX].end(), nY) - mpX[nowX].begin();
-
-			if(startIdx<endIdx){
-				if(Xidx.count(nowX)){
-					Xidx[nowX].first = min(Xidx[nowX].first, startIdx);
-					Xidx[nowX].second = max(Xidx[nowX].second, endIdx);
-				}else{
-					Xidx[nowX] = make_pair(startIdx, endIdx);
-				}
-			}
-			nowY = nY;
-		}else if(D == 'D'){
-			ll nY = nowY - C;
-
-			if(!mpX.count(nowX)){
-				nowY = nY;
-				continue;
-			}
-
-			int startIdx = lower_bound(mpX[nowX].begin(), mpX[nowX].end(), nY) - mpX[nowX].begin();
-			int endIdx = upper_bound(mpX[nowX].begin(), mpX[nowX].end(), nowY) - mpX[nowX].begin();
-
-			if(startIdx<endIdx){
-				if(Xidx.count(nowX)){
-					Xidx[nowX].first = min(Xidx[nowX].first, startIdx);
-					Xidx[nowX].second = max(Xidx[nowX].second, endIdx);
-				}else{
-					Xidx[nowX] = make_pair(startIdx, endIdx);
-				}
-			}
-			nowY = nY;
-		}else if(D == 'L'){
-			ll nX = nowX - C;
-
-			if(!mpY.count(nowY)){
-				nowX = nX;
-				continue;
-			}
-
-			int startIdx = lower_bound(mpY[nowY].begin(), mpY[nowY].end(), nX) - mpY[nowY].begin();
-			int endIdx = upper_bound(mpY[nowY].begin(), mpY[nowY].end(), nowX) - mpY[nowY].begin();
-
-			if(startIdx<endIdx){
-				if(Yidx.count(nowY)){
-					Yidx[nowY].first = min(Yidx[nowY].first, startIdx);
-					Yidx[nowY].second = max(Yidx[nowY].second, endIdx);
-				}else{
-					Yidx[nowY] = make_pair(startIdx, endIdx);
-				}
-			}
-			nowX = nX;
-		}else if(D == 'R'){
-			ll nX = nowX + C;
-
-			if(!mpY.count(nowY)){
-				nowX = nX;
-				continue;
-			}
-
-			int startIdx = lower_bound(mpY[nowY].begin(), mpY[nowY].end(), nowX) - mpY[nowY].begin();
-			int endIdx = upper_bound(mpY[nowY].begin(), mpY[nowY].end(), nX) - mpY[nowY].begin();
-
-			if(startIdx<endIdx){
-				if(Yidx.count(nowY)){
-					Yidx[nowY].first = min(Yidx[nowY].first, startIdx);
-					Yidx[nowY].second = max(Yidx[nowY].second, endIdx);
-				}else{
-					Yidx[nowY] = make_pair(startIdx, endIdx);
-				}
-			}
-			nowX = nX;
-		}
+		Sx = nx; Sy = ny;
 	}
 
-	set<pair<ll, ll>> st;
-	for(auto [k, v] : Xidx){
-		FOR(i,v.first, v.second){
-			st.insert(make_pair(k, mpX[k][i]));
-		}
-	}
-
-	for(auto [k, v] : Yidx){
-		FOR(i,v.first, v.second){
-			st.insert(make_pair(mpY[k][i], k));
-		}
-	}
-
-	ll ans = st.size();
-	cout << nowX << " " << nowY << " " << ans << endl;
+	printf("%lld %lld %d\n", Sx, Sy, ans);
 
 	return 0;
 
