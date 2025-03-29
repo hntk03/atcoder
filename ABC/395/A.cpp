@@ -14,36 +14,27 @@ using ll = long long;
 // print
 #define pv(val) cerr << #val << '=' << (val) << endl
 
-void Print(int a)
-{
-  cout << a << endl;
-}
-
 const int INF = 1e9;
 
-int main(void)
-{
+int main(void) {
 
-  while (true)
-  {
-    cout << endl;
+  int N;
+  cin >> N;
+
+  vector<int> A(N);
+  REP(i, N) cin >> A[i];
+
+  bool ans = true;
+  FOR(i, 1, N) {
+    if (A[i - 1] < A[i])
+      continue;
+    ans = false;
   }
 
-  vector<int> A(3);
-  REP(i, 3) cin >> A[i];
+  if (ans)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 
-  vector<int> idx = {0, 1, 2};
-
-  do
-  {
-    if (A[idx[0]] * A[idx[1]] == A[idx[2]])
-    {
-      cout << "Yes" << endl;
-      return 0;
-    }
-
-  } while (next_permutation(idx.begin(), idx.end()));
-
-  cout << "No" << endl;
   return 0;
 }
