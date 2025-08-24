@@ -18,20 +18,22 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N; cin >> N;
-	vector<ll> A(N);
-	REP(i,N) cin >> A[i];
+	int Q; cin >> Q;
 
-	ll sum = reduce(A.begin(), A.end());
-
-	ll ans = 0;
-	REP(i,N){
-		sum -= A[i];
-		ans += A[i] * sum;
+	vector<int> v;
+	REP(i,Q){
+		int type; cin >> type;
+		if(type == 1){
+			int x; cin >> x;
+			v.push_back(x);
+			sort(v.begin(), v.end());
+			reverse(v.begin(), v.end());
+		}else{
+			cout << v.back() << endl;
+			v.pop_back();
+		}
 	}
 
-	cout << ans << endl;
-	
 	return 0;
 
 }

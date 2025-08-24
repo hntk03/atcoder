@@ -18,20 +18,16 @@ const int INF = 1e9;
 
 int main(void){
 
-	int N; cin >> N;
-	vector<ll> A(N);
-	REP(i,N) cin >> A[i];
+	string S; cin >> S;
 
-	ll sum = reduce(A.begin(), A.end());
+	map<string, string> mp;
+	mp["red"] = "SSS";
+	mp["blue"] = "FFF";
+	mp["green"] = "MMM";
 
-	ll ans = 0;
-	REP(i,N){
-		sum -= A[i];
-		ans += A[i] * sum;
-	}
+	if(mp.count(S)) cout << mp[S] << endl;
+	else cout << "Unknown" << endl;
 
-	cout << ans << endl;
-	
 	return 0;
 
 }
