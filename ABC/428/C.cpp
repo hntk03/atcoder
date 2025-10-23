@@ -19,44 +19,19 @@ const int INF = 1e9;
 int main(void){
 
   int Q; cin >> Q;
-
-  vector<string> now;
-  string S = "";
+  vector<int> x = {0};
   REP(i,Q){
     int type; cin >> type;
     if(type == 1){
       char c; cin >> c;
-      S += c;
-      if(c == '('){
-        now.push_back("(");
-      }else{
-        if(now.size() == 0){
-          now.push_back(")");
-        }else{
-          if(now.back() == "("){
-            now.pop_back();
-          }else{
-            now.push_back(")");
-          }
-        }
-      }
+      int nx = x.back() + (c == '(' ? 1 : -1);
+      if(nx < 0) nx = -INF;
+      x.push_back(nx);
     }else{
-      S.pop_back();
-      if(now.size() == 0){
-        if(S.size() != 0){
-          now.push_back("()");
-          now.back().pop_back();
-        } 
-      }else{
-        now.back().pop_back();
-        if(now.back() == ""){
-          now.pop_back();
-        } 
-      }
+      x.pop_back();
     }
-    cout << (now.size() == 0 ? "Yes" : "No") << endl;
+
+    cout << (x.back() == 0 ? "Yes" : "No") << endl;
   }
-
   return 0;
-
 }
