@@ -17,19 +17,20 @@ using ll = long long;
 const int INF = 1e9;
 
 int main(void) {
-  string X;
-  cin >> X;
+  int N;
+  cin >> N;
+  vector<int> A(N);
+  REP(i, N) cin >> A[i];
 
-  SORT(X);
-
-  if (X.front() == '0') {
-    int idx = 1;
-    while (idx < X.size() and X[idx] == '0') {
-      idx++;
+  REP(i, N) {
+    int idx = -1;
+    REP(j, i) {
+      if (A[j] > A[i]) {
+        idx = j + 1;
+      }
     }
-    swap(X[0], X[idx]);
+    cout << idx << endl;
   }
 
-  cout << X << endl;
   return 0;
 }

@@ -17,19 +17,18 @@ using ll = long long;
 const int INF = 1e9;
 
 int main(void) {
-  string X;
-  cin >> X;
+  int X, Y, Z;
+  cin >> X >> Y >> Z;
 
-  SORT(X);
-
-  if (X.front() == '0') {
-    int idx = 1;
-    while (idx < X.size() and X[idx] == '0') {
-      idx++;
+  while (X >= Y * Z) {
+    if (X == Y * Z) {
+      cout << "Yes" << endl;
+      return 0;
     }
-    swap(X[0], X[idx]);
+    X++;
+    Y++;
   }
 
-  cout << X << endl;
+  cout << "No" << endl;
   return 0;
 }
