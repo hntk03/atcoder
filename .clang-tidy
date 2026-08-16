@@ -1,0 +1,36 @@
+---
+Checks: '-*,
+  clang-analyzer-*,
+  performance-*,
+  readability-*,
+  modernize-*,
+  cppcoreguidelines-*,
+
+  bugprone-*,
+  -bugprone-easily-swappable-parameters,
+  -readability-identifier-length,
+  -cppcoreguidelines-init-variables,
+  -readability-isolate-declaration,
+  -modernize-use-trailing-return-type,
+  -cppcoreguidelines-macro-usage,
+  -bugprone-macro-parentheses,
+  '
+WarningsAsErrors: ''
+HeaderFileExtensions:
+  - ''
+  - h
+  - hh
+  - hpp
+  - hxx
+ImplementationFileExtensions:
+  - c
+  - cc
+  - cpp
+  - cxx
+HeaderFilterRegex: ''
+ExcludeHeaderFilterRegex: ''
+FormatStyle:     none
+CheckOptions:    {}
+SystemHeaders:   false
+...
+
